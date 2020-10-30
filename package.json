@@ -1,0 +1,19 @@
+{
+  "name": "covid_graphs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/williams-c/covid_graphs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/williams-c/covid_graphs/issues"
+  },
+  "homepage": "https://github.com/williams-c/covid_graphs#readme"
+}
