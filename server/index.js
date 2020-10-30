@@ -23,19 +23,23 @@ app.get('/data', async (req, res) => {
   const dataPath = path.join(__dirname, 'data_scripts', 'daily_cases_county.csv')
   res.sendFile(dataPath)
 })
-
-app.get('/csv_data', (req, res) => {
+// test = ?start=2020-04-01&end=2020-06-30&state=Colorado&state=Utah
+app.get('/csv_data/states', (req, res) => {
+  const start = req.query.start
+  const end = req.query.end
+  const states = req.query.state
+  console.log(...states)
   const options = {
     mode: 'text',
     pythonOptions: ['-u'],
     scriptPath: 'data_scripts',
-    args: ['2020-04-01', '2020-06-30', ['Colorado', 'Missouri']]
+    args: [start, end, ...states]
   }
 
   PythonShell.run('state_total.py', options, (err, data) => {
     if (err) throw err
 
-    console.log('results:', results)
+    res.status(200).sendFile(path.join(__dirname, 'total_cases_state.csv'))
   })
 })
 
