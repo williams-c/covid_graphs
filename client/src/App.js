@@ -36,7 +36,6 @@ const App = () => {
         y: unpack(rows, 'Utah'),
         line: {color: '#7F7F7F'}
       }
-      console.log(trace1)
 
       updateData([trace1,trace2]);
 

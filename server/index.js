@@ -12,6 +12,7 @@ const PORT = 3001;
 app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
 app.get('/', (req, res) => {
@@ -23,7 +24,7 @@ app.get('/hello', (req, res) => {
 })
 
 app.get('/data', async (req, res) => {
-  const dataPath = path.resolve('data_scripts', 'total_state.csv')
+  const dataPath = path.join(__dirname, 'data_scripts', 'daily_cases_state.csv')
   res.sendFile(dataPath)
 })
 

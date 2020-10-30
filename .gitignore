@@ -1,3 +1,10 @@
+#client
+client/node_modules
+client/.pnp
+client/.pnp.js
+client/coverage
+client/build
+client/.DS_Store
 # Logs
 logs
 *.log
