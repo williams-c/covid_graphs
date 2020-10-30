@@ -1,15 +1,11 @@
 const express = require('express');
-const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path')
-const csv = require('csv-parser')
-const fs = require('fs')
-
+const { PythonShell } = require('python-shell')
 
 const app = express();
 const PORT = 3001;
 
-app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -24,8 +20,23 @@ app.get('/hello', (req, res) => {
 })
 
 app.get('/data', async (req, res) => {
-  const dataPath = path.join(__dirname, 'data_scripts', 'daily_cases_state.csv')
+  const dataPath = path.join(__dirname, 'data_scripts', 'daily_cases_county.csv')
   res.sendFile(dataPath)
+})
+
+app.get('/csv_data', (req, res) => {
+  const options = {
+    mode: 'text',
+    pythonOptions: ['-u'],
+    scriptPath: 'data_scripts',
+    args: ['2020-04-01', '2020-06-30', ['Colorado', 'Missouri']]
+  }
+
+  PythonShell.run('state_total.py', options, (err, data) => {
+    if (err) throw err
+
+    console.log('results:', results)
+  })
 })
 
 app.listen(PORT, () => {

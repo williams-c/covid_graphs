@@ -8,36 +8,35 @@ const App = () => {
   const [plotLayout, updateLayout] = useState('')
 
   useEffect(() => {
-    createPlot()
+    createPlot("http://localhost:3000/data")
   },[])
 
-  const createPlot = () => {
-    // d3.csv('/state.csv').then(data => {console.log(data)})
-    Plotly.d3.csv("http://localhost:3000/data", (rows) => {
-      console.log(rows)
+  const graphColors = ['black', 'red', 'green','blue','orange','purple', 'pink','yellow']
+  const createPlot = (endpoint) => {
+    Plotly.d3.csv(endpoint, (rows) => {
       const unpack = (rows, key) => {
         return rows.map((row) => { return row[key]; });
       }
-
-      var trace1 = {
-        type: "scatter",
-        mode: "lines",
-        name: 'Colorado',
-        x: unpack(rows, 'Date'),
-        y: unpack(rows, 'Colorado'),
-        line: {color: '#17BECF'}
+      let graphElements = []
+      let colorPicker = 0
+      for (const [key, value] of Object.entries(rows[0])) {
+        if (key === 'Date') {
+          continue
+        } else {
+          let trace = {
+            type: "scatter",
+            mode: "lines",
+            name: key,
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, key),
+            line: {color: graphColors[colorPicker]}
+          }
+          colorPicker += 1
+          graphElements.push(trace)
+        }
       }
 
-      var trace2 = {
-        type: "scatter",
-        mode: "lines",
-        name: 'Utah',
-        x: unpack(rows, 'Date'),
-        y: unpack(rows, 'Utah'),
-        line: {color: '#7F7F7F'}
-      }
-
-      updateData([trace1,trace2]);
+      updateData(graphElements);
 
       updateLayout({
         title: 'Total Covid Cases By State',
@@ -47,7 +46,6 @@ const App = () => {
 
   return (
     <div className="App">
-      Test
       <Plot data={plotData} layout={plotLayout} />
     </div>
   );
