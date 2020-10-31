@@ -20,10 +20,6 @@ app.get('/hello', (req, res) => {
   res.status(200).send('hello world!')
 })
 
-app.get('/data', async (req, res) => {
-  const dataPath = path.join(__dirname, 'data_scripts', 'daily_cases_county.csv')
-  res.sendFile(dataPath)
-})
 // test = /total/states?start=2020-04-01&end=2020-06-30&state=Colorado&state=Utah&state=Montana
 app.get('/total/states', (req, res) => {
   const start = req.query.start ? req.query.start : '2020-01-22'
@@ -137,6 +133,42 @@ app.get('/daily/:state/counties', (req, res) => {
     }
 
     res.status(200).sendFile(path.join(__dirname, 'daily_cases_county.csv'))
+  })
+})
+
+app.get('/list/:state/counties', (req, res) => {
+  const state = req.params.state
+  const options = {
+    mode: 'text',
+    pythonOptions: ['-u'],
+    scriptPath: 'data_scripts',
+    args: [state]
+  }
+
+  PythonShell.run('get_counties.py', options, (err, data) => {
+    if (err) {
+      res.sendStatus(500)
+      throw err
+    }
+
+    res.status(200).sendFile(path.join(__dirname, 'counties_list.csv'))
+  })
+})
+
+app.get('/list/states', (req, res) => {
+  const options = {
+    mode: 'text',
+    pythonOptions: ['-u'],
+    scriptPath: 'data_scripts',
+  }
+
+  PythonShell.run('get_states.py', options, (err, data) => {
+    if (err) {
+      res.sendStatus(500)
+      throw err
+    }
+
+    res.status(200).sendFile(path.join(__dirname, 'states_list.csv'))
   })
 })
 
