@@ -90,27 +90,29 @@ app.get('/daily/states', (req, res) => {
   })
 })
 
-// app.get('/daily/:state/counties', (req, res) => {
-//   const state = req.params.state
-//   const start = req.query.start
-//   const end = req.query.end
-//   const counties = req.query.county
-//   const options = {
-//     mode: 'text',
-//     pythonOptions: ['-u'],
-//     scriptPath: 'data_scripts',
-//     args: [start, end, state, ...counties]
-//   }
+app.get('/daily/:state/counties', (req, res) => {
+  const state = req.params.state
+  const start = req.query.start
+  const end = req.query.end
+  const counties = req.query.county
+  // interval can be day(D), week(W), month(M) or year(Y)
+  const interval = req.query.interval ? req.query.interval : 'D'
+  const options = {
+    mode: 'text',
+    pythonOptions: ['-u'],
+    scriptPath: 'data_scripts',
+    args: [start, end, state, interval, ...counties]
+  }
 
-//   PythonShell.run('county_total.py', options, (err, data) => {
-//     if (err) {
-//       res.sendStatus(500)
-//       throw err
-//     }
+  PythonShell.run('county_daily.py', options, (err, data) => {
+    if (err) {
+      res.sendStatus(500)
+      throw err
+    }
 
-//     res.status(200).sendFile(path.join(__dirname, 'total_cases_county.csv'))
-//   })
-// })
+    res.status(200).sendFile(path.join(__dirname, 'daily_cases_county.csv'))
+  })
+})
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
