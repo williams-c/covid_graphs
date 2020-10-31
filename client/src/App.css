@@ -4,4 +4,12 @@
 .dropdown{
   margin-left: 20px;
   margin-bottom: 10px;
+  margin-right: 10px;
+}
+.add-state-btn{
+  margin-left: 10px;
+}
+.submit-btn{
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
