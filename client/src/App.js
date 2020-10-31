@@ -8,7 +8,7 @@ const App = () => {
   const [plotLayout, updateLayout] = useState('')
 
   useEffect(() => {
-    createPlot("http://localhost:3000/data")
+    createPlot("http://localhost:3000/csv_data/states?start=2020-03-01&end=2020-04-12&state=Colorado&state=Washington")
   },[])
 
   const graphColors = ['black', 'red', 'green','blue','orange','purple', 'pink','yellow']
@@ -19,6 +19,7 @@ const App = () => {
       }
       let graphElements = []
       let colorPicker = 0
+      // iterate through columns and create a line for each
       for (const [key, value] of Object.entries(rows[0])) {
         if (key === 'Date') {
           continue

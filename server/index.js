@@ -23,12 +23,11 @@ app.get('/data', async (req, res) => {
   const dataPath = path.join(__dirname, 'data_scripts', 'daily_cases_county.csv')
   res.sendFile(dataPath)
 })
-// test = ?start=2020-04-01&end=2020-06-30&state=Colorado&state=Utah
+// test = /csv_data/states?start=2020-04-01&end=2020-06-30&state=Colorado&state=Utah&state=Montana
 app.get('/csv_data/states', (req, res) => {
   const start = req.query.start
   const end = req.query.end
   const states = req.query.state
-  console.log(...states)
   const options = {
     mode: 'text',
     pythonOptions: ['-u'],
