@@ -8,7 +8,7 @@ const App = () => {
   const [plotLayout, updateLayout] = useState('')
 
   useEffect(() => {
-    createPlot("http://localhost:3000/daily/Missouri/counties?start=2020-04-01&end=2020-09-30&county=Greene&county=Boone&interval=W")
+    createPlot("http://localhost:3000/total/Missouri/counties?county=Greene&county=Boone")
   },[])
 
   const graphColors = ['black', 'red', 'green','blue','orange','purple', 'pink','yellow']

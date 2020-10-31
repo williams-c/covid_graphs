@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path')
 const { PythonShell } = require('python-shell')
+const { getDate } = require('./server_helpers/getDate')
 
 const app = express();
 const PORT = 3001;
@@ -25,8 +26,8 @@ app.get('/data', async (req, res) => {
 })
 // test = /total/states?start=2020-04-01&end=2020-06-30&state=Colorado&state=Utah&state=Montana
 app.get('/total/states', (req, res) => {
-  const start = req.query.start
-  const end = req.query.end
+  const start = req.query.start ? req.query.start : '2020-01-22'
+  const end = req.query.end ? req.query.end : getDate()
   const states = req.query.state
   const options = {
     mode: 'text',
@@ -47,8 +48,8 @@ app.get('/total/states', (req, res) => {
 
 app.get('/total/:state/counties', (req, res) => {
   const state = req.params.state
-  const start = req.query.start
-  const end = req.query.end
+  const start = req.query.start ? req.query.start : '2020-01-22'
+  const end = req.query.end ? req.query.end : getDate()
   const counties = req.query.county
   const options = {
     mode: 'text',
@@ -68,8 +69,8 @@ app.get('/total/:state/counties', (req, res) => {
 })
 
 app.get('/daily/states', (req, res) => {
-  const start = req.query.start
-  const end = req.query.end
+  const start = req.query.start ? req.query.start : '2020-01-22'
+  const end = req.query.end ? req.query.end : getDate()
   const states = req.query.state
   // interval can be day(D), week(W), month(M) or year(Y)
   const interval = req.query.interval ? req.query.interval : 'D'
@@ -92,8 +93,8 @@ app.get('/daily/states', (req, res) => {
 
 app.get('/daily/:state/counties', (req, res) => {
   const state = req.params.state
-  const start = req.query.start
-  const end = req.query.end
+  const start = req.query.start ? req.query.start : '2020-01-22'
+  const end = req.query.end ? req.query.end : getDate()
   const counties = req.query.county
   // interval can be day(D), week(W), month(M) or year(Y)
   const interval = req.query.interval ? req.query.interval : 'D'
@@ -115,6 +116,5 @@ app.get('/daily/:state/counties', (req, res) => {
 })
 
 app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
   console.log(`Your server is running on PORT: ${PORT}`);
 });
