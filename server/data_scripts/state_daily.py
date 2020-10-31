@@ -1,9 +1,9 @@
+import sys
 import pandas as pd
-from format_csv import format_csv_by_state
+from format_state import format_csv_by_state
 
-def daily_cases_by_state(start, end, states, interval):
-  df = pd.read_csv(f'time_series_covid19_confirmed_US.csv')
-  print(df)
+def daily_cases_by_state(start, end, interval, states):
+  df = pd.read_csv(f'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv')
   df = format_csv_by_state(df, start, end, states)
   df = df.diff()
   df = df.resample('1' + interval).sum()
@@ -14,3 +14,8 @@ def daily_cases_by_state(start, end, states, interval):
   df.to_csv('daily_cases_state.csv')
   return df
 
+statesArray = []
+for i in range (4, len(sys.argv)):
+  statesArray.append(sys.argv[i])
+
+daily_cases_by_state(sys.argv[1], sys.argv[2], sys.argv[3], statesArray)
