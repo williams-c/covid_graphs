@@ -9,8 +9,10 @@ def total_cases_by_state(start, end, states):
   df = df.to_csv('total_cases_state.csv')
   return df
 
-statesArray = []
-for i in range (3, len(sys.argv)):
-  statesArray.append(sys.argv[i])
+statesArray = sys.argv[3]
+if statesArray != 'all':
+  statesArray = []
+  for i in range (3, len(sys.argv)):
+    statesArray.append(sys.argv[i])
 
 total_cases_by_state(sys.argv[1], sys.argv[2], statesArray)

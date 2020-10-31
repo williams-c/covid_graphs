@@ -9,8 +9,10 @@ def total_cases_by_county(start, end, state, counties):
   df.to_csv('total_cases_county.csv')
   return df
 
-countiesArray = []
-for i in range (4, len(sys.argv)):
-  countiesArray.append(sys.argv[i])
+countiesArray = sys.argv[4]
+if countiesArray != 'all':
+  countiesArray = []
+  for i in range (4, len(sys.argv)):
+    countiesArray.append(sys.argv[i])
 
 total_cases_by_county(sys.argv[1], sys.argv[2], sys.argv[3], countiesArray)

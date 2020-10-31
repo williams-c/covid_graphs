@@ -11,6 +11,8 @@ def format_csv_by_state(df, start, end, states):
   df = df.set_index(datetime_index)
   # select between start and end dates
   df = df[start:end]
+  if states == 'all':
+    return df
   # select specific states
   df = df[states]
   return df
