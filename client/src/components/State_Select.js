@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-const test = ['Colorado', 'Utah', 'Montana', 'Missouri']
-
-const State_Select = ({ selectedStates, updateStates, allStates }) => {
-  const [currentState, updateCurrentState] = useState('')
+const State_Select = ({ selectedStates, updateStates, allStates, currentState, updateCurrent }) => {
+  // const [currentState, updateCurrentState] = useState('')
 
   const addStateHandler = () => {
     if (selectedStates.includes(currentState) || !currentState) {
@@ -20,7 +18,7 @@ const State_Select = ({ selectedStates, updateStates, allStates }) => {
 
       Select States
 
-        <select onChange={(e) => {updateCurrentState(e.target.value)}} className="dropdown state-dropdown">
+        <select value={currentState} onChange={(e) => {updateCurrent(e.target.value)}} className="dropdown state-dropdown">
 
           <option value=""></option>
           {allStates.map((value, index) => {

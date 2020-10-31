@@ -5,12 +5,10 @@ import Plotly from 'plotly.js'
 const Graph = ({ query }) => {
   const [plotData, updateData] = useState('')
   const [plotLayout, updateLayout] = useState('')
+  const [loading, updateLoading] = useState(false)
 
-  useEffect(() => {
-    createPlot('http://localhost:3000/total/states')
-  }, [])
-
-  useEffect(() => {
+  useEffect(async () => {
+    updateLoading(true)
     createPlot("http://localhost:3000/" + query)
   },[query])
 
@@ -48,17 +46,21 @@ const Graph = ({ query }) => {
         }
       }
       // update Plot data
-      updateData(graphElements);
-
+      updateData(graphElements)
       updateLayout({
         title: 'Total Covid Cases By State',
-      });
+      })
+      updateLoading(false)
     })
   }
 
   return (
     <div className="Graph">
-      <Plot data={plotData} layout={plotLayout} />
+      {
+       loading ?
+       <h1>Loading, please wait...</h1> :
+       <Plot data={plotData} layout={plotLayout} />
+      }
     </div>
   );
 }
