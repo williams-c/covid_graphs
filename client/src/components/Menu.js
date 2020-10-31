@@ -19,7 +19,7 @@ const Menu = ({ updateQuery }) => {
 
   const getStates = async () => {
     try{
-      const data = await axios.get('/list/states')
+      const data = await axios.get('/data/states_list.csv')
       let stateData = parseCsv(data.data)
       updateStates(stateData)
     } catch(err) {
@@ -60,7 +60,7 @@ const Menu = ({ updateQuery }) => {
   return (
     <div className="Menu">
       <button onClick={submitQuery} className="submit-btn">Submit</button>
-      <div>
+      {/* <div>
         Select Dataset
         <select onChange={(e) => {updateDatasetSelection(e.target.value)}} className="dropdown dataset_dropdown">
           <option value=""></option>
@@ -76,7 +76,7 @@ const Menu = ({ updateQuery }) => {
           <option value="States">States</option>
           <option value="Counties">Counties</option>
         </select>
-      </div>
+      </div> */}
 
       <div>
         Starting Date
@@ -86,6 +86,15 @@ const Menu = ({ updateQuery }) => {
       </div>
 
       <State_Select selectedStates={selectedStates} updateStates={updateSelectedStates} allStates={stateList} currentState={currentState} updateCurrent={updateCurrentState}/>
+
+      <div>
+        <div className="selected-state">
+          Getting Data For:
+        </div>
+        {selectedStates.map((state) => {
+          return <span className="selected-state">{state}</span>
+        })}
+      </div>
 
     </div>
   );

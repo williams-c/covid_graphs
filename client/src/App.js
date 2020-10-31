@@ -8,7 +8,11 @@ const App = () => {
 
   return (
     <div className="App">
-      <Graph query={queryString}/>
+      {
+      queryString ?
+      <Graph query={queryString} /> :
+      <h1 className="default-text">What Would You Like To See?</h1>
+      }
       <Menu updateQuery={updateQueryString}/>
     </div>
   );

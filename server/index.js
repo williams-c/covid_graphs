@@ -12,12 +12,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
+app.use('/data', express.static(path.join(__dirname, 'static_csv')));
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
 })
 
 app.get('/hello', (req, res) => {
   res.status(200).send('hello world!')
+})
+
+app.get('/data', (req, res) => {
+  res.sendStatus(200)
 })
 
 // test = /total/states?start=2020-04-01&end=2020-06-30&state=Colorado&state=Utah&state=Montana
