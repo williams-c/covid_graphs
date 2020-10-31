@@ -11,6 +11,7 @@ const Menu = ({ updateQuery }) => {
   const [popSelection, updatePopSelection] = useState('')
   const [startDate, updateStart] = useState('')
   const [endDate, updateEnd] = useState()
+  const [currentState, updateCurrentState] = useState('')
 
   useEffect(() => {
     getStates()
@@ -53,6 +54,7 @@ const Menu = ({ updateQuery }) => {
     updateSelectedStates([])
     updateStart('')
     updateEnd('')
+    updateCurrentState('')
   }
 
   return (
@@ -78,12 +80,12 @@ const Menu = ({ updateQuery }) => {
 
       <div>
         Starting Date
-        <input onChange={(e) => {updateStart(e.target.value)}} type="date" className="dropdown date-input" min="2020-01-22" max="2020-10-30"></input>
+        <input value={startDate} onChange={(e) => {updateStart(e.target.value)}} type="date" className="dropdown date-input" min="2020-01-22" max="2020-10-30"></input>
         Ending Date
-        <input onChange={(e) => {updateEnd(e.target.value)}} type="date" className="dropdown date-input" min="2020-01-23" max="2020-10-31"></input>
+        <input value={endDate} onChange={(e) => {updateEnd(e.target.value)}} type="date" className="dropdown date-input" min="2020-01-23" max="2020-10-31"></input>
       </div>
 
-      <State_Select selectedStates={selectedStates} updateStates={updateSelectedStates} allStates={stateList}/>
+      <State_Select selectedStates={selectedStates} updateStates={updateSelectedStates} allStates={stateList} currentState={currentState} updateCurrent={updateCurrentState}/>
 
     </div>
   );
