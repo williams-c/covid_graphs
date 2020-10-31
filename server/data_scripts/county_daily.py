@@ -16,8 +16,10 @@ def daily_cases_by_county(start, end, state, interval, counties):
   return df
 
 #get counties arguments
-countiesArray = []
-for i in range (5, len(sys.argv)):
-  countiesArray.append(sys.argv[i])
+countiesArray = sys.argv[5]
+if countiesArray != 'all' :
+  countiesArray = []
+  for i in range (5, len(sys.argv)):
+    countiesArray.append(sys.argv[i])
 
 daily_cases_by_county(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], countiesArray)

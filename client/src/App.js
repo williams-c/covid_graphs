@@ -8,10 +8,11 @@ const App = () => {
   const [plotLayout, updateLayout] = useState('')
 
   useEffect(() => {
-    createPlot("http://localhost:3000/total/Missouri/counties?county=Greene&county=Boone")
+    createPlot("http://localhost:3000/total/states")
   },[])
 
   const graphColors = ['black', 'red', 'green','blue','orange','purple', 'pink','yellow']
+
   const createPlot = (endpoint) => {
     Plotly.d3.csv(endpoint, (rows) => {
       const unpack = (rows, key) => {
@@ -19,8 +20,9 @@ const App = () => {
       }
       let graphElements = []
       let colorPicker = 0
-      // iterate through columns and create a line for each
+      // iterate through csv columns and create a line for each
       for (const [key, value] of Object.entries(rows[0])) {
+
         if (key === 'Date') {
           continue
         } else {
@@ -32,11 +34,17 @@ const App = () => {
             y: unpack(rows, key),
             line: {color: graphColors[colorPicker]},
           }
-          colorPicker += 1
+
+          if (colorPicker >= graphColors.length - 1) {
+            colorPicker = 0
+          } else {
+            colorPicker += 1
+          }
+
           graphElements.push(trace)
         }
       }
-
+      // update Plot data
       updateData(graphElements);
 
       updateLayout({

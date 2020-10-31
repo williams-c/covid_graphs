@@ -14,8 +14,10 @@ def daily_cases_by_state(start, end, interval, states):
   df.to_csv('daily_cases_state.csv')
   return df
 
-statesArray = []
-for i in range (4, len(sys.argv)):
-  statesArray.append(sys.argv[i])
+statesArray = sys.argv[4]
+if statesArray != 'all':
+  statesArray = []
+  for i in range (4, len(sys.argv)):
+    statesArray.append(sys.argv[i])
 
 daily_cases_by_state(sys.argv[1], sys.argv[2], sys.argv[3], statesArray)

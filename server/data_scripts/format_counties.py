@@ -1,6 +1,7 @@
 import pandas as pd
 
 def format_csv_by_county(df, start, end, state, counties):
+  df = df.loc[df['Province_State'] == state]
   df = df.drop(columns=['UID', 'code3', 'iso2', 'iso3', 'FIPS', 'Lat', 'Long_', 'Country_Region', 'Combined_Key'])
   df = df.groupby('Admin2').agg('sum')
   # flips columns and rows
@@ -12,5 +13,7 @@ def format_csv_by_county(df, start, end, state, counties):
   # select between start and end dates
   df = df[start:end]
   # select specified counties
+  if counties == 'all':
+    return df
   df = df[counties]
   return df
