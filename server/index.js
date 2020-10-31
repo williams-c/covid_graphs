@@ -36,9 +36,34 @@ app.get('/csv_data/states', (req, res) => {
   }
 
   PythonShell.run('state_total.py', options, (err, data) => {
-    if (err) throw err
+    if (err) {
+      res.sendStatus(500)
+      throw err
+    }
 
     res.status(200).sendFile(path.join(__dirname, 'total_cases_state.csv'))
+  })
+})
+
+app.get('/csv_data/:state/counties', (req, res) => {
+  const state = req.params.state
+  const start = req.query.start
+  const end = req.query.end
+  const counties = req.query.county
+  const options = {
+    mode: 'text',
+    pythonOptions: ['-u'],
+    scriptPath: 'data_scripts',
+    args: [start, end, state, ...counties]
+  }
+
+  PythonShell.run('county_total.py', options, (err, data) => {
+    if (err) {
+      res.sendStatus(500)
+      throw err
+    }
+
+    res.status(200).sendFile(path.join(__dirname, 'total_cases_county.csv'))
   })
 })
 

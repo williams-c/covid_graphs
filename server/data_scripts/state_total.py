@@ -10,7 +10,6 @@ def total_cases_by_state(start, end, states):
   return df
 
 statesArray = []
-counter = 0
 for i in range (3, len(sys.argv)):
   statesArray.append(sys.argv[i])
 

@@ -8,7 +8,7 @@ const App = () => {
   const [plotLayout, updateLayout] = useState('')
 
   useEffect(() => {
-    createPlot("http://localhost:3000/csv_data/states?start=2020-03-01&end=2020-04-12&state=Colorado&state=Washington")
+    createPlot("http://localhost:3000/csv_data/Colorado/counties?start=2020-03-01&end=2020-10-15&county=Boulder&county=Weld")
   },[])
 
   const graphColors = ['black', 'red', 'green','blue','orange','purple', 'pink','yellow']
@@ -30,7 +30,7 @@ const App = () => {
             name: key,
             x: unpack(rows, 'Date'),
             y: unpack(rows, key),
-            line: {color: graphColors[colorPicker]}
+            line: {color: graphColors[colorPicker]},
           }
           colorPicker += 1
           graphElements.push(trace)
