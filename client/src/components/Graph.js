@@ -2,13 +2,17 @@ import React, { useState, useEffect } from 'react';
 import Plot from 'react-plotly.js';
 import Plotly from 'plotly.js'
 
-const Graph = () => {
+const Graph = ({ query }) => {
   const [plotData, updateData] = useState('')
   const [plotLayout, updateLayout] = useState('')
 
   useEffect(() => {
-    createPlot("http://localhost:3000/total/states?start=2020-06-01&end=2020-10-01&state=Alabama&state=Arkansas&state=California")
-  },[])
+    createPlot('http://localhost:3000/total/states')
+  }, [])
+
+  useEffect(() => {
+    createPlot("http://localhost:3000/" + query)
+  },[query])
 
   const graphColors = ['black', 'red', 'green','blue','orange','purple', 'pink','yellow']
 

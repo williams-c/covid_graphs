@@ -3,7 +3,7 @@ import axios from 'axios';
 import State_Select from './State_Select';
 import County_Select from './County_Select';
 
-const Menu = () => {
+const Menu = ({ updateQuery }) => {
   const [countyList, updateCounties] = useState('')
   const [stateList, updateStates] = useState([])
   const [selectedStates, updateSelectedStates] = useState([])
@@ -49,8 +49,10 @@ const Menu = () => {
     selectedStates.forEach((state) => {
       queryString += ('state=' + state + '&')
     })
-    const data = await axios.get('/total/states' + queryString)
-    console.log(data.data)
+    updateQuery('/total/states' + queryString)
+    updateSelectedStates([])
+    updateStart('')
+    updateEnd('')
   }
 
   return (

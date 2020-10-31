@@ -4,11 +4,12 @@ import Graph from './components/Graph';
 import Menu from './components/Menu';
 
 const App = () => {
+  const [queryString, updateQueryString] = useState('')
 
   return (
     <div className="App">
-      <Graph />
-      <Menu />
+      <Graph query={queryString}/>
+      <Menu updateQuery={updateQueryString}/>
     </div>
   );
 }
