@@ -48,7 +48,7 @@ const Graph = ({ query }) => {
       // update Plot data
       updateData(graphElements)
       updateLayout({
-        title: 'Total Covid Cases By State',
+        title: 'Total COVID-19 Cases By State',
       })
       updateLoading(false)
     })

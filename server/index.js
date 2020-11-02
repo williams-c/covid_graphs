@@ -27,7 +27,7 @@ app.get('/data', (req, res) => {
 })
 
 // test = /total/states?start=2020-04-01&end=2020-06-30&state=Colorado&state=Utah&state=Montana
-app.get('/total/states', (req, res) => {
+app.get('/total/state', (req, res) => {
   const start = req.query.start ? req.query.start : '2020-01-22'
   const end = req.query.end ? req.query.end : getDate()
   const states = req.query.state ? req.query.state : 'all'
@@ -54,7 +54,7 @@ app.get('/total/states', (req, res) => {
   })
 })
 
-app.get('/total/:state/counties', (req, res) => {
+app.get('/total/:state/county', (req, res) => {
   const state = req.params.state
   const start = req.query.start ? req.query.start : '2020-01-22'
   const end = req.query.end ? req.query.end : getDate()
@@ -82,7 +82,7 @@ app.get('/total/:state/counties', (req, res) => {
   })
 })
 
-app.get('/daily/states', (req, res) => {
+app.get('/daily/state', (req, res) => {
   const start = req.query.start ? req.query.start : '2020-01-22'
   const end = req.query.end ? req.query.end : getDate()
   const states = req.query.state ? req.query.state : 'all'
@@ -111,7 +111,7 @@ app.get('/daily/states', (req, res) => {
   })
 })
 
-app.get('/daily/:state/counties', (req, res) => {
+app.get('/daily/:state/county', (req, res) => {
   const state = req.params.state
   const start = req.query.start ? req.query.start : '2020-01-22'
   const end = req.query.end ? req.query.end : getDate()
