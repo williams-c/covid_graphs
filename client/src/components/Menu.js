@@ -11,7 +11,6 @@ const Menu = ({ updateQuery }) => {
   const [popSelection, updatePopSelection] = useState('')
   const [startDate, updateStart] = useState('')
   const [endDate, updateEnd] = useState()
-  const [currentState, updateCurrentState] = useState('')
 
   useEffect(() => {
     getStates()
@@ -54,7 +53,17 @@ const Menu = ({ updateQuery }) => {
     updateSelectedStates([])
     updateStart('')
     updateEnd('')
-    updateCurrentState('')
+  }
+
+  const selectStateHandler = (e) => {
+    const selection = e.currentTarget.textContent
+    if (selectedStates.includes(selection)) {
+      updateSelectedStates(selectedStates.filter((value) => {
+        return value !== selection
+      }))
+    } else {
+      updateSelectedStates(selectedStates.concat([e.currentTarget.textContent]))
+    }
   }
 
   return (
@@ -84,17 +93,12 @@ const Menu = ({ updateQuery }) => {
         Ending Date
         <input value={endDate} onChange={(e) => {updateEnd(e.target.value)}} type="date" className="dropdown date-input" min="2020-01-23" max="2020-10-31"></input>
       </div>
-      <State_Select selectedStates={selectedStates} updateStates={updateSelectedStates} allStates={stateList} currentState={currentState} updateCurrent={updateCurrentState}/>
 
-      <div>
-        <div className="selected-state">
-          Getting Data For:
-        </div>
-        {selectedStates.map((state) => {
-          return <span className="selected-state">{state}</span>
-        })}
-      </div>
+      <State_Select addState={selectStateHandler} selectedStates={selectedStates} allStates={stateList}/>
 
+      {selectedStates.map((value) => {
+        return (<div>{value}</div>)
+      })}
     </div>
   );
 }

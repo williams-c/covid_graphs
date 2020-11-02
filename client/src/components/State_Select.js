@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 
-const State_Select = ({ selectedStates, updateStates, allStates, currentState, updateCurrent }) => {
+const State_Select = ({ addState, selectedStates, allStates }) => {
   // const [currentState, updateCurrentState] = useState('')
+  // const addStateHandler = () => {
+  //   if (selectedStates.includes(currentState) || !currentState) {
+  //     alert('State already selected')
+  //     return
+  //   }
+  //   let states = selectedStates
+  //   states.push(currentState)
+  //   updateStates(states)
+  // }
 
-  const addStateHandler = () => {
-    if (selectedStates.includes(currentState) || !currentState) {
-      alert('State already selected')
-      return
-    }
-    let states = selectedStates
-    states.push(currentState)
-    updateStates(states)
-  }
+
+
 
   return (
 
@@ -31,11 +33,13 @@ const State_Select = ({ selectedStates, updateStates, allStates, currentState, u
 
         {allStates.map((value, index) => {
           return (
-            <div className="checkbox-wrapper">
+            <div onClick={(e) => {addState(e)}} className={`checkbox-wrapper ${selectedStates.includes(value) ? "checkbox-selected" : ""}`}>
 
-            <span className="checkbox-text">{value}</span>
+              <span value={value} className={"checkbox-text"}>
+                {value}
+              </span>
 
-          </div>
+            </div>
           )
         })}
 
