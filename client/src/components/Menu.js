@@ -52,8 +52,19 @@ const Menu = ({ updateQuery }) => {
   }
 
   const submitQuery = async () => {
+    if (!datasetSelection) {
+      alert('Please select a dataset')
+      return
+    } else if (!popSelection) {
+      alert ('Please select a population')
+      return
+    }
     let queryString = `/${datasetSelection}`
     if (popSelection === 'county') {
+      if (!stateCounty) {
+        alert('Please select a state')
+        return
+      }
       queryString += `/${stateCounty}`
     }
     queryString += `/${popSelection}?`
@@ -96,16 +107,16 @@ const Menu = ({ updateQuery }) => {
       <div>
         Select Dataset:
         <select onChange={(e) => {updateDatasetSelection(e.target.value)}} className="dropdown dataset_dropdown">
-          <option value={datasetSelection}></option>
-          <option value="total">Total Cases</option>
-          <option value="daily">Cases Per Day</option>
+          <option></option>
+          <option value="Total">Total Cases</option>
+          <option value="Daily">Cases Per Day</option>
         </select>
       </div>
 
       <div>
         Select Population:
         <select onChange={(e) => {updatePopSelection(e.target.value)}} className="dropdown dataset_dropdown">
-          <option value={popSelection}></option>
+          <option></option>
           <option value="state">States</option>
           <option value="county">Counties</option>
         </select>
