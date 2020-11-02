@@ -23,3 +23,21 @@
   margin-top: 20px;
   margin-bottom: 50px;
 }
+.pop-select{
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  width: 75%;
+  margin: auto;
+}
+.checkbox-wrapper{
+  border: 1px solid black;
+  width: 175px;
+  height: 30px;
+  padding-top: 10px;
+  margin: 2px;
+}
+.checkbox-text{
+  width: 100%;
+  font-size: large;
+}

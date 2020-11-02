@@ -84,7 +84,6 @@ const Menu = ({ updateQuery }) => {
         Ending Date
         <input value={endDate} onChange={(e) => {updateEnd(e.target.value)}} type="date" className="dropdown date-input" min="2020-01-23" max="2020-10-31"></input>
       </div>
-
       <State_Select selectedStates={selectedStates} updateStates={updateSelectedStates} allStates={stateList} currentState={currentState} updateCurrent={updateCurrentState}/>
 
       <div>

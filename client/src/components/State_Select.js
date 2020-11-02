@@ -14,22 +14,33 @@ const State_Select = ({ selectedStates, updateStates, allStates, currentState, u
   }
 
   return (
-    <div className="pop-select">
 
-      Select States
 
-        <select value={currentState} onChange={(e) => {updateCurrent(e.target.value)}} className="dropdown state-dropdown">
+      <div className="pop-select">
 
-          <option value=""></option>
-          {allStates.map((value, index) => {
-            return (<option value={value}>{value}</option>)
-          })}
+          {/* <select value={currentState} onChange={(e) => {updateCurrent(e.target.value)}} className="dropdown state-dropdown">
 
-        </select>
+  <option value=""></option>
+  {allStates.map((value, index) => {
+    return (<option value={value}>{value}</option>)
+  })}
 
-        <button onClick={() => {addStateHandler()}} className="add-state-btn">Add</button>
+  </select>
 
-    </div>
+  <button onClick={() => {addStateHandler()}} className="add-state-btn">Add</button> */}
+
+        {allStates.map((value, index) => {
+          return (
+            <div className="checkbox-wrapper">
+
+            <span className="checkbox-text">{value}</span>
+
+          </div>
+          )
+        })}
+
+      </div>
+
   );
 }
 
