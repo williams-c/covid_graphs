@@ -47,8 +47,10 @@ const Graph = ({ query }) => {
       }
       // update Plot data
       updateData(graphElements)
+      let plotLabel = query.split('/')
+      plotLabel = plotLabel[1]
       updateLayout({
-        title: 'Total Covid Cases By State',
+        title: `${plotLabel} COVID-19 Cases`,
       })
       updateLoading(false)
     })

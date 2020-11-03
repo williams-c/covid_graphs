@@ -27,7 +27,7 @@ app.get('/data', (req, res) => {
 })
 
 // test = /total/states?start=2020-04-01&end=2020-06-30&state=Colorado&state=Utah&state=Montana
-app.get('/total/states', (req, res) => {
+app.get('/total/state', (req, res) => {
   const start = req.query.start ? req.query.start : '2020-01-22'
   const end = req.query.end ? req.query.end : getDate()
   const states = req.query.state ? req.query.state : 'all'
@@ -54,7 +54,7 @@ app.get('/total/states', (req, res) => {
   })
 })
 
-app.get('/total/:state/counties', (req, res) => {
+app.get('/total/:state/county', (req, res) => {
   const state = req.params.state
   const start = req.query.start ? req.query.start : '2020-01-22'
   const end = req.query.end ? req.query.end : getDate()
@@ -82,7 +82,7 @@ app.get('/total/:state/counties', (req, res) => {
   })
 })
 
-app.get('/daily/states', (req, res) => {
+app.get('/daily/state', (req, res) => {
   const start = req.query.start ? req.query.start : '2020-01-22'
   const end = req.query.end ? req.query.end : getDate()
   const states = req.query.state ? req.query.state : 'all'
@@ -111,7 +111,7 @@ app.get('/daily/states', (req, res) => {
   })
 })
 
-app.get('/daily/:state/counties', (req, res) => {
+app.get('/daily/:state/county', (req, res) => {
   const state = req.params.state
   const start = req.query.start ? req.query.start : '2020-01-22'
   const end = req.query.end ? req.query.end : getDate()
@@ -139,6 +139,62 @@ app.get('/daily/:state/counties', (req, res) => {
     }
 
     res.status(200).sendFile(path.join(__dirname, 'daily_cases_county.csv'))
+  })
+})
+
+app.get('/change/state', (req, res) => {
+  const start = req.query.start ? req.query.start : '2020-01-23'
+  const end = req.query.end ? req.query.end : getDate()
+  const states = req.query.state ? req.query.state : 'all'
+  let argsList = []
+  if (typeof states === 'string') {
+    argsList = [start, end, states]
+  } else {
+    argsList = [start, end, ...states]
+  }
+  const options = {
+    mode: 'text',
+    pythonOptions: ['-u'],
+    scriptPath: 'data_scripts',
+    args: argsList
+  }
+
+  PythonShell.run('state_pct_change.py', options, (err, data) => {
+    if (err) {
+      res.sendStatus(500)
+      throw err
+    }
+
+    res.status(200).sendFile(path.join(__dirname, 'pct_change_state.csv'))
+  })
+})
+
+app.get('/change/:state/county', (req, res) => {
+  const state = req.params.state
+  const start = req.query.start ? req.query.start : '2020-01-22'
+  const end = req.query.end ? req.query.end : getDate()
+  const counties = req.query.county ? req.query.county : 'all'
+  let argsList = []
+  // county can be multi item array, or a string
+  if (typeof counties === 'string') {
+    argsList = [start, end, state, counties]
+  } else {
+    argsList = [start, end, state, ...counties]
+  }
+  const options = {
+    mode: 'text',
+    pythonOptions: ['-u'],
+    scriptPath: 'data_scripts',
+    args: argsList
+  }
+
+  PythonShell.run('county_pct_change.py', options, (err, data) => {
+    if (err) {
+      res.sendStatus(500)
+      throw err
+    }
+
+    res.status(200).sendFile(path.join(__dirname, 'pct_change_county.csv'))
   })
 })
 
