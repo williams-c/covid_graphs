@@ -187,7 +187,6 @@ app.get('/change/:state/county', (req, res) => {
     scriptPath: 'data_scripts',
     args: argsList
   }
-  console.log(argsList)
 
   PythonShell.run('county_pct_change.py', options, (err, data) => {
     if (err) {
