@@ -1,5 +1,16 @@
+body{
+  background-color: #394867;
+}
+.container{
+  display: grid;
+  grid-template-columns: 15% 70% 15%;
+  height: 100vh;
+}
 .App {
   text-align: center;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  background-color: #f1f6f9;
 }
 .dropdown{
   margin-left: 20px;
@@ -36,11 +47,16 @@
   height: 30px;
   padding-top: 10px;
   margin: 2px;
+  background-color: white;
+  border-radius: 10px;
 }
 .checkbox-text{
   width: 100%;
   font-size: small;
 }
 .checkbox-selected{
-  background-color: skyblue;
+  background-color: #9ba4b4;
+}
+.county-loading{
+  margin-top: 20px;
 }
