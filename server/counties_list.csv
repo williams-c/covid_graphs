@@ -1,61 +1,78 @@
 ,Admin2
-195,Alameda
-196,Alpine
-197,Amador
-198,Butte
-199,Calaveras
-200,Colusa
-201,Contra Costa
-202,Del Norte
-203,El Dorado
-204,Fresno
-205,Glenn
-206,Humboldt
-207,Imperial
-208,Inyo
-209,Kern
-210,Kings
-211,Lake
-212,Lassen
-213,Los Angeles
-214,Madera
-215,Marin
-216,Mariposa
-217,Mendocino
-218,Merced
-219,Modoc
-220,Mono
-221,Monterey
-222,Napa
-223,Nevada
-224,Orange
-225,Out of CA
-226,Placer
-227,Plumas
-228,Riverside
-229,Sacramento
-230,San Benito
-231,San Bernardino
-232,San Diego
-233,San Francisco
-234,San Joaquin
-235,San Luis Obispo
-236,San Mateo
-237,Santa Barbara
-238,Santa Clara
-239,Santa Cruz
-240,Shasta
-241,Sierra
-242,Siskiyou
-243,Solano
-244,Sonoma
-245,Stanislaus
-246,Sutter
-247,Tehama
-248,Trinity
-249,Tulare
-250,Tuolumne
-251,Unassigned
-252,Ventura
-253,Yolo
-254,Yuba
+118,Arkansas
+119,Ashley
+120,Baxter
+121,Benton
+122,Boone
+123,Bradley
+124,Calhoun
+125,Carroll
+126,Chicot
+127,Clark
+128,Clay
+129,Cleburne
+130,Cleveland
+131,Columbia
+132,Conway
+133,Craighead
+134,Crawford
+135,Crittenden
+136,Cross
+137,Dallas
+138,Desha
+139,Drew
+140,Faulkner
+141,Franklin
+142,Fulton
+143,Garland
+144,Grant
+145,Greene
+146,Hempstead
+147,Hot Spring
+148,Howard
+149,Independence
+150,Izard
+151,Jackson
+152,Jefferson
+153,Johnson
+154,Lafayette
+155,Lawrence
+156,Lee
+157,Lincoln
+158,Little River
+159,Logan
+160,Lonoke
+161,Madison
+162,Marion
+163,Miller
+164,Mississippi
+165,Monroe
+166,Montgomery
+167,Nevada
+168,Newton
+169,Ouachita
+170,Out of AR
+171,Perry
+172,Phillips
+173,Pike
+174,Poinsett
+175,Polk
+176,Pope
+177,Prairie
+178,Pulaski
+179,Randolph
+180,Saline
+181,Scott
+182,Searcy
+183,Sebastian
+184,Sevier
+185,Sharp
+186,St. Francis
+187,Stone
+188,Unassigned
+189,Union
+190,Van Buren
+191,Washington
+192,White
+193,Woodruff
+194,Yell
