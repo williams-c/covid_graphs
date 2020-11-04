@@ -2,15 +2,21 @@ import React, { useState, useEffect } from 'react';
 import Plot from 'react-plotly.js';
 import Plotly from 'plotly.js'
 
-const Graph = ({ query }) => {
-  const [plotData, updateData] = useState('')
-  const [plotLayout, updateLayout] = useState('')
+const Graph = ({ query, plotData, plotLayout, updateData, updateLayout, updatePlotHistory, updateSelectedGraph }) => {
+  // const [plotData, updateData] = useState('')
+  // const [plotLayout, updateLayout] = useState('')
   const [loading, updateLoading] = useState(false)
 
+  // create new graph on query submission
   useEffect(async () => {
     updateLoading(true)
     createPlot("http://localhost:3000/" + query)
   },[query])
+
+  // display selected graph on thumbnail click
+  useEffect(() => {
+    changePlot(plotData, plotLayout)
+  }, [plotData, plotLayout])
 
   const graphColors = ['black', 'red', 'green','blue','orange','purple', 'pink','yellow']
 
@@ -41,7 +47,6 @@ const Graph = ({ query }) => {
           } else {
             colorPicker += 1
           }
-
           graphElements.push(trace)
         }
       }
@@ -49,11 +54,40 @@ const Graph = ({ query }) => {
       updateData(graphElements)
       let plotLabel = query.split('/')
       plotLabel = plotLabel[1]
-      updateLayout({
+      plotLabel = {
         title: `${plotLabel} COVID-19 Cases`,
-      })
+        autosize: true,
+      }
+      updateLayout(plotLabel)
+      Plotly.newPlot(
+        'graph',
+         graphElements,
+         plotLabel,
+         {responsive: true,},
+         )
+      .then(
+          function(gd)
+           {
+            Plotly.toImage(gd, {height:300,width:300})
+               .then(
+                   function(url)
+               {
+                   updatePlotHistory(history => [...history, [url, graphElements, plotLabel]])
+               }
+               )
+          });
+      updateSelectedGraph(-1)
       updateLoading(false)
     })
+  }
+
+  const changePlot = (data, layout) => {
+    Plotly.newPlot(
+      'graph',
+      data,
+      layout,
+      {responsive: true,},
+     )
   }
 
   return (
@@ -61,8 +95,9 @@ const Graph = ({ query }) => {
       {
        loading ?
        <h1>Loading, please wait...</h1> :
-       <Plot data={plotData} layout={plotLayout} />
-      }
+      ''
+    }
+    <div id="graph"></div>
     </div>
   );
 }

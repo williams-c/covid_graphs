@@ -124,7 +124,7 @@ const Menu = ({ updateQuery }) => {
 
   return (
     <div className="Menu">
-      <button onClick={submitQuery} className="submit-btn">Submit</button>
+
       <div>
         Select Dataset:
         <select onChange={(e) => {datasetHandler(e.target.value)}} className="dropdown dataset_dropdown">
@@ -157,6 +157,8 @@ const Menu = ({ updateQuery }) => {
         Ending Date:
         <input value={endDate} onChange={(e) => {updateEnd(e.target.value)}} type="date" className="dropdown date-input" min="2020-01-24" max="2020-11-02"></input>
       </div>
+
+      {datasetSelection && popSelection ? <button onClick={submitQuery} className="submit-btn">Create Graph</button> : ''}
 
       {popSelection === '' ?
       ''
