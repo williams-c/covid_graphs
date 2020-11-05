@@ -6,9 +6,10 @@ const cors = require('cors')
 const { PythonShell } = require('python-shell')
 const { getDate } = require('./server_helpers/getDate')
 const stringify = require('csv-stringify');
+require('dotenv').config()
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -286,7 +287,7 @@ app.get('/testing_locations', (req, res) => {
   axios.get('https://maps.googleapis.com/maps/api/place/textsearch/json', {
     headers: {'Access-Control-Allow-Origin': '*'},
     params : {
-      key: 'AIzaSyCpqIqeE6gFW8H8hdrpiciFBPeCWKszDps',
+      key: process.env.PLACES_API_KEY,
       query: 'covid testing',
       location: `${lat},${long}`,
       radius: 10000,
