@@ -58,7 +58,18 @@ const Graph = ({ query, plotData, plotLayout, updateData, updateLayout, updatePl
       plotLabel = plotLabel[1]
       plotLabel = {
         title: `${plotLabel} COVID-19 Cases`,
+        height: (document.querySelector('#graph').clientWidth * 0.6),
         autosize: true,
+        yaxis: {
+          automargin: true,
+        },
+        margin: {
+          l: 25,
+          r: 25,
+          b: 50,
+          t: 50,
+          pad: 4
+        },
       }
       updateLayout(plotLabel)
       Plotly.newPlot(
@@ -107,8 +118,8 @@ const Graph = ({ query, plotData, plotLayout, updateData, updateLayout, updatePl
         ''
       }
       <div id="graph"></div>
-        {loading ? '' : <button className="download-btn" onClick={downloadHandler}>Download CSV</button>}
-      </div>
+      {loading ? '' : <button className="download-btn" onClick={downloadHandler}>Download CSV</button>}
+    </div>
   );
 }
 

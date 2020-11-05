@@ -93,12 +93,10 @@ button{
   margin-bottom: 10px;
 }
 .download-btn{
-  position: absolute;
-  top: 75%;
-  right: 21%;
+  position: relative;
   padding-top: 5px;
   padding-bottom: 5px;
-  z-index: 99999;
+  margin-bottom: 10px;
 }
 .test-location-text{
   text-decoration: underline;

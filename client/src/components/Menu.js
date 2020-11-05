@@ -154,6 +154,8 @@ const Menu = ({ updateQuery }) => {
       <div>
         Starting Date:
         <input value={startDate} onChange={(e) => {updateStart(e.target.value)}} type="date" className="dropdown date-input" min="2020-01-23" max="2020-11-03"></input>
+      </div>
+      <div>
         Ending Date:
         <input value={endDate} onChange={(e) => {updateEnd(e.target.value)}} type="date" className="dropdown date-input" min="2020-01-24" max="2020-11-04"></input>
       </div>
