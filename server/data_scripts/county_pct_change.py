@@ -10,8 +10,9 @@ def daily_pct_change_by_county(start, end, state, counties):
   df.drop(df.head(1).index,inplace=True)
   df.drop(df.tail(1).index,inplace=True)
   df.index.names=['Date']
-  df.to_csv('pct_change_county.csv')
-  return df
+  output = df.to_csv()
+  print(output)
+  sys.stdout.flush()
 
 countiesArray = sys.argv[4]
 if countiesArray != 'all':

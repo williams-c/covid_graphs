@@ -10,8 +10,9 @@ def daily_pct_change_by_state(start, end, states):
   df.drop(df.head(1).index,inplace=True)
   df.drop(df.tail(1).index,inplace=True)
   df.index.names=['Date']
-  df.to_csv('pct_change_state.csv')
-  return df
+  output = df.to_csv()
+  print(output)
+  sys.stdout.flush()
 
 statesArray = sys.argv[3]
 if statesArray != 'all':

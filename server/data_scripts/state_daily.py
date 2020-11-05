@@ -11,8 +11,9 @@ def daily_cases_by_state(start, end, interval, states):
   df.drop(df.head(1).index,inplace=True)
   df.drop(df.tail(1).index,inplace=True)
   df.index.names=['Date']
-  df.to_csv('daily_cases_state.csv')
-  return df
+  output = df.to_csv()
+  print(output)
+  sys.stdout.flush()
 
 statesArray = sys.argv[4]
 if statesArray != 'all':

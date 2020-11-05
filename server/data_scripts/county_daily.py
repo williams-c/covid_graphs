@@ -12,8 +12,9 @@ def daily_cases_by_county(start, end, state, interval, counties):
   df.drop(df.head(1).index,inplace=True)
   df.drop(df.tail(1).index,inplace=True)
   df.index.names=['Date']
-  df.to_csv('daily_cases_county.csv')
-  return df
+  output = df.to_csv()
+  print(output)
+  sys.stdout.flush()
 
 #get counties arguments
 countiesArray = sys.argv[5]
