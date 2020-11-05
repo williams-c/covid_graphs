@@ -13,7 +13,7 @@ const Menu = ({ updateQuery }) => {
   const [timeframe, updateTimeFrame] = useState('')
   const [popSelection, updatePopSelection] = useState('')
   const [startDate, updateStart] = useState('2020-01-22')
-  const [endDate, updateEnd] = useState('2020-11-02')
+  const [endDate, updateEnd] = useState('2020-11-04')
   const [countiesLoading, updateCountiesLoading] = useState(false)
 
   useEffect(() => {
@@ -108,8 +108,8 @@ const Menu = ({ updateQuery }) => {
       updateTimeFrame('')
       return
     }
-    if (value === 'Daily') {
-      updateDatasetSelection(value)
+    if (value === 'Daily' || value === 'Weekly' || value === "Monthly") {
+      updateDatasetSelection('Daily')
       updateTimeFrame('D')
       if (value === 'Weekly') {
         updateTimeFrame('W')
@@ -124,7 +124,7 @@ const Menu = ({ updateQuery }) => {
 
   return (
     <div className="Menu">
-      <button onClick={submitQuery} className="submit-btn">Submit</button>
+
       <div>
         Select Dataset:
         <select onChange={(e) => {datasetHandler(e.target.value)}} className="dropdown dataset_dropdown">
@@ -153,10 +153,14 @@ const Menu = ({ updateQuery }) => {
 
       <div>
         Starting Date:
-        <input value={startDate} onChange={(e) => {updateStart(e.target.value)}} type="date" className="dropdown date-input" min="2020-01-23" max="2020-11-01"></input>
-        Ending Date:
-        <input value={endDate} onChange={(e) => {updateEnd(e.target.value)}} type="date" className="dropdown date-input" min="2020-01-24" max="2020-11-02"></input>
+        <input value={startDate} onChange={(e) => {updateStart(e.target.value)}} type="date" className="dropdown date-input" min="2020-01-23" max="2020-11-03"></input>
       </div>
+      <div>
+        Ending Date:
+        <input value={endDate} onChange={(e) => {updateEnd(e.target.value)}} type="date" className="dropdown date-input" min="2020-01-24" max="2020-11-04"></input>
+      </div>
+
+      {datasetSelection && popSelection ? <button onClick={submitQuery} className="submit-btn">Create Graph</button> : ''}
 
       {popSelection === '' ?
       ''

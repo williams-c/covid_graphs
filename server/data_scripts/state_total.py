@@ -6,8 +6,9 @@ def total_cases_by_state(start, end, states):
   df = pd.read_csv(f'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv')
   df = format_csv_by_state(df, start, end, states)
   df.index.names=['Date']
-  df = df.to_csv('total_cases_state.csv')
-  return df
+  output = df.to_csv()
+  print(output)
+  sys.stdout.flush()
 
 statesArray = sys.argv[3]
 if statesArray != 'all':

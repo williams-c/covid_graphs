@@ -3,7 +3,7 @@ body{
 }
 .container{
   display: grid;
-  grid-template-columns: 15% 70% 15%;
+  grid-template-columns: 20% 60% 20%;
   height: 100vh;
 }
 .App {
@@ -38,7 +38,7 @@ body{
   justify-content: center;
   display: flex;
   flex-wrap: wrap;
-  width: 75%;
+  width: 100%;
   margin: auto;
 }
 .checkbox-wrapper{
@@ -59,4 +59,52 @@ body{
 }
 .county-loading{
   margin-top: 20px;
+}
+button{
+  border: 2px solid #14274e;
+  border-radius: 10px;
+}
+.submit-btn{
+  width: 200px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.sidebar{
+  text-align: center;
+}
+.graph-img{
+  width: 75%;
+  height: auto;
+  border: 3px solid #9ba4b4;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+.title-text{
+  margin-left: 5%;
+  margin-right: 5%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #f1f6f9;
+  border: 2px solid #9ba4b4;
+  border-radius: 10px;
+}
+#graph{
+  border: 2px solid #9ba4b4;
+  margin-bottom: 10px;
+}
+.download-btn{
+  position: relative;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+.test-location-text{
+  text-decoration: underline;
+  font-weight: bold;
+}
+.test-location-title{
+  font-size: medium;
+}
+.test-location-address{
+  font-size: small;
 }

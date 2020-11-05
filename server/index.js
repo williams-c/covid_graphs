@@ -1,12 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path')
+const axios = require('axios')
+const cors = require('cors')
 const { PythonShell } = require('python-shell')
 const { getDate } = require('./server_helpers/getDate')
+const stringify = require('csv-stringify');
+require('dotenv').config()
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -28,7 +33,7 @@ app.get('/data', (req, res) => {
 
 // test = /total/states?start=2020-04-01&end=2020-06-30&state=Colorado&state=Utah&state=Montana
 app.get('/total/state', (req, res) => {
-  const start = req.query.start ? req.query.start : '2020-01-22'
+  const start = req.query.start ? req.query.start : '2020-01-23'
   const end = req.query.end ? req.query.end : getDate()
   const states = req.query.state ? req.query.state : 'all'
   let argsList = []
@@ -49,14 +54,20 @@ app.get('/total/state', (req, res) => {
       res.sendStatus(500)
       throw err
     }
-
-    res.status(200).sendFile(path.join(__dirname, 'total_cases_state.csv'))
+    let response = []
+    data.forEach((row) => {
+      row = row.split(',')
+      response.push(row)
+    })
+    stringify(response, function(err, output){
+      res.status(200).send(output)
+    })
   })
 })
 
 app.get('/total/:state/county', (req, res) => {
   const state = req.params.state
-  const start = req.query.start ? req.query.start : '2020-01-22'
+  const start = req.query.start ? req.query.start : '2020-01-23'
   const end = req.query.end ? req.query.end : getDate()
   const counties = req.query.county ? req.query.county : 'all'
   let argsList = []
@@ -77,13 +88,19 @@ app.get('/total/:state/county', (req, res) => {
       res.sendStatus(500)
       throw err
     }
-
-    res.status(200).sendFile(path.join(__dirname, 'total_cases_county.csv'))
+    let response = []
+    data.forEach((row) => {
+      row = row.split(',')
+      response.push(row)
+    })
+    stringify(response, function(err, output){
+      res.status(200).send(output)
+    })
   })
 })
 
 app.get('/daily/state', (req, res) => {
-  const start = req.query.start ? req.query.start : '2020-01-22'
+  const start = req.query.start ? req.query.start : '2020-01-23'
   const end = req.query.end ? req.query.end : getDate()
   const states = req.query.state ? req.query.state : 'all'
   // interval can be day(D), week(W), month(M) or year(Y)
@@ -106,14 +123,20 @@ app.get('/daily/state', (req, res) => {
       res.sendStatus(500)
       throw err
     }
-
-    res.status(200).sendFile(path.join(__dirname, 'daily_cases_state.csv'))
+    let response = []
+    data.forEach((row) => {
+      row = row.split(',')
+      response.push(row)
+    })
+    stringify(response, function(err, output){
+      res.status(200).send(output)
+    })
   })
 })
 
 app.get('/daily/:state/county', (req, res) => {
   const state = req.params.state
-  const start = req.query.start ? req.query.start : '2020-01-22'
+  const start = req.query.start ? req.query.start : '2020-01-23'
   const end = req.query.end ? req.query.end : getDate()
   const counties = req.query.county ? req.query.county : 'all'
   // interval can be day(D), week(W), month(M) or year(Y)
@@ -137,8 +160,14 @@ app.get('/daily/:state/county', (req, res) => {
       res.sendStatus(500)
       throw err
     }
-
-    res.status(200).sendFile(path.join(__dirname, 'daily_cases_county.csv'))
+    let response = []
+    data.forEach((row) => {
+      row = row.split(',')
+      response.push(row)
+    })
+    stringify(response, function(err, output){
+      res.status(200).send(output)
+    })
   })
 })
 
@@ -164,14 +193,20 @@ app.get('/change/state', (req, res) => {
       res.sendStatus(500)
       throw err
     }
-
-    res.status(200).sendFile(path.join(__dirname, 'pct_change_state.csv'))
+    let response = []
+    data.forEach((row) => {
+      row = row.split(',')
+      response.push(row)
+    })
+    stringify(response, function(err, output){
+      res.status(200).send(output)
+    })
   })
 })
 
 app.get('/change/:state/county', (req, res) => {
   const state = req.params.state
-  const start = req.query.start ? req.query.start : '2020-01-22'
+  const start = req.query.start ? req.query.start : '2020-01-23'
   const end = req.query.end ? req.query.end : getDate()
   const counties = req.query.county ? req.query.county : 'all'
   let argsList = []
@@ -193,8 +228,14 @@ app.get('/change/:state/county', (req, res) => {
       res.sendStatus(500)
       throw err
     }
-
-    res.status(200).sendFile(path.join(__dirname, 'pct_change_county.csv'))
+    let response = []
+    data.forEach((row) => {
+      row = row.split(',')
+      response.push(row)
+    })
+    stringify(response, function(err, output){
+      res.status(200).send(output)
+    })
   })
 })
 
@@ -212,8 +253,14 @@ app.get('/list/:state/counties', (req, res) => {
       res.sendStatus(500)
       throw err
     }
-
-    res.status(200).sendFile(path.join(__dirname, 'counties_list.csv'))
+    let response = []
+    data.forEach((row) => {
+      row = row.split(',')
+      response.push(row)
+    })
+    stringify(response, function(err, output){
+      res.status(200).send(output)
+    })
   })
 })
 
@@ -230,8 +277,27 @@ app.get('/list/states', (req, res) => {
       throw err
     }
 
-    res.status(200).sendFile(path.join(__dirname, 'states_list.csv'))
+    res.status(200).sendFile(path.join(__dirname, 'static', 'states_list.csv'))
   })
+})
+
+app.get('/testing_locations', (req, res) => {
+  const lat = req.query.lat
+  const long = req.query.long
+  axios.get('https://maps.googleapis.com/maps/api/place/textsearch/json', {
+    headers: {'Access-Control-Allow-Origin': '*'},
+    params : {
+      key: process.env.PLACES_API_KEY,
+      query: 'covid testing',
+      location: `${lat},${long}`,
+      radius: 10000,
+      origin: '*',
+    }
+    })
+    .then((data) => {
+      res.send(data.data)
+    })
+    .catch((err) => console.error(err))
 })
 
 app.listen(PORT, () => {
