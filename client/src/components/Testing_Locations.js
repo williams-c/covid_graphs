@@ -30,7 +30,8 @@ const Testing_Locations = ({ userLocation }) => {
   return (
     <div className="sidebar">
 
-      <p className="title-text test-location-text">Feeling Sick?</p>
+      <p className="title-text test-location-text">Feeling Sick? Get Tested!</p>
+
       <div className="title-text">
         <p className="test-location-text">Testing Locations Near You</p>
 

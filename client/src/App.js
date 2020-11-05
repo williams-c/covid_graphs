@@ -36,6 +36,7 @@ const App = () => {
         <Testing_Locations userLocation={userLocation} />
 
         <div className="App">
+          <h1>COVID-19 Data Visualizer</h1>
           {
             queryString ?
             <Graph
@@ -47,7 +48,7 @@ const App = () => {
               updatePlotHistory={updatePlotHistory}
               updateSelectedGraph={updateSelectedGraph}
             /> :
-            <h1 className="default-text">What Would You Like To See?</h1>
+            <h3 className="default-text">What Would You Like To See?</h3>
           }
           <Menu updateQuery={updateQueryString}/>
         </div>

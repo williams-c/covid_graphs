@@ -103,7 +103,7 @@ const Graph = ({ query, plotData, plotLayout, updateData, updateLayout, updatePl
     <div className="Graph">
       {
         loading ?
-        <h1>Loading, please wait...</h1> :
+        <h3>Loading, please wait...</h3> :
         ''
       }
       <div id="graph"></div>
