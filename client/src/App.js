@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Graph from './components/Graph';
 import Menu from './components/Menu';
 import Graph_History from './components/Graph_History';
+import Testing_Locations from './components/Testing_Locations';
 
 const App = () => {
   const [queryString, updateQueryString] = useState('')
@@ -10,6 +11,7 @@ const App = () => {
   const [plotLayout, updateLayout] = useState('')
   const [plotHistory, updatePlotHistory] = useState([])
   const [selectedGraph, updateSelectedGraph] = useState(-1)
+  const [userLocation, updateUserLocation] = useState([])
 
   const changeSelectedHandler = (index) => {
     updateSelectedGraph(index)
@@ -20,12 +22,18 @@ const App = () => {
     updateLayout(layout)
   }
 
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      const location = [position.coords.latitude, position.coords.longitude]
+      updateUserLocation(location)
+    });
+  },[])
+
   return (
 
       <div className="container">
-        {/* <div className="header">
-          COVID-19 Data Visualizer
-        </div> */}
+
+        <Testing_Locations userLocation={userLocation} />
 
         <div className="App">
           {

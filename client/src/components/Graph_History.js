@@ -10,10 +10,10 @@ const Graph_History = ({ plotHistory, selectedGraph, changeSelected }) => {
 
 
   return (
-    <div className="graph-history">
-      <p className="previous-text">
-        Your Previous Graphs
-      </p>
+    <div className="sidebar">
+
+        {plotHistory.length > 1 ? <p className="title-text test-location-text">Your Previous Graphs</p>: ''}
+
       {plotHistory.map((image, index) => {
         if (selectedGraph === -1 && index === plotHistory.length - 1) {
           return

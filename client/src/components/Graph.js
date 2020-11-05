@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Plot from 'react-plotly.js';
-import Plotly from 'plotly.js'
+import Plotly from 'plotly.js';
+import axios from 'axios';
+import fileDownload from 'js-file-download';
 
 const Graph = ({ query, plotData, plotLayout, updateData, updateLayout, updatePlotHistory, updateSelectedGraph }) => {
   // const [plotData, updateData] = useState('')
@@ -90,15 +92,23 @@ const Graph = ({ query, plotData, plotLayout, updateData, updateLayout, updatePl
      )
   }
 
+  const downloadHandler = () => {
+    axios.get('http://localhost:3000/' + query)
+      .then((response) => {
+        fileDownload(response.data, 'covid_data.csv')
+      })
+  }
+
   return (
     <div className="Graph">
       {
-       loading ?
-       <h1>Loading, please wait...</h1> :
-      ''
-    }
-    <div id="graph"></div>
-    </div>
+        loading ?
+        <h1>Loading, please wait...</h1> :
+        ''
+      }
+      <div id="graph"></div>
+        {loading ? '' : <button className="download-btn" onClick={downloadHandler}>Download CSV</button>}
+      </div>
   );
 }
 
