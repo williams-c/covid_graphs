@@ -5,7 +5,7 @@ const Testing_Locations = ({ userLocation }) => {
   const [testingLocations, updateTestingLocations] = useState([])
 
   useEffect(() => {
-    axios.get('http://localhost:3000/testing_locations', {
+    axios.get('/testing_locations', {
       params : {
         lat: userLocation[0],
         long: userLocation[1],
