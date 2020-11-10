@@ -12,7 +12,7 @@ const Graph = ({ query, plotData, plotLayout, updateData, updateLayout, updatePl
   // create new graph on query submission
   useEffect(async () => {
     updateLoading(true)
-    createPlot("http://localhost:3000/" + query)
+    createPlot(query)
   },[query])
 
   // display selected graph on thumbnail click
@@ -104,7 +104,7 @@ const Graph = ({ query, plotData, plotLayout, updateData, updateLayout, updatePl
   }
 
   const downloadHandler = () => {
-    axios.get('http://localhost:3000/' + query)
+    axios.get(query)
       .then((response) => {
         fileDownload(response.data, 'covid_data.csv')
       })
@@ -118,7 +118,7 @@ const Graph = ({ query, plotData, plotLayout, updateData, updateLayout, updatePl
         ''
       }
       <div id="graph"></div>
-      {loading ? '' : <button className="download-btn" onClick={downloadHandler}>Download CSV</button>}
+        {loading ? '' : <button className="download-btn" onClick={downloadHandler}>Download CSV</button>}
     </div>
   );
 }

@@ -23,14 +23,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
 })
 
-app.get('/hello', (req, res) => {
-  res.status(200).send('hello world!')
-})
-
-app.get('/data', (req, res) => {
-  res.sendStatus(200)
-})
-
 // test = /total/states?start=2020-04-01&end=2020-06-30&state=Colorado&state=Utah&state=Montana
 app.get('/total/state', (req, res) => {
   const start = req.query.start ? req.query.start : '2020-01-23'

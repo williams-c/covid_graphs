@@ -3,6 +3,7 @@ import axios from 'axios';
 import State_Select from './State_Select';
 import County_Select from './County_Select';
 import State_Dropdown from './State_Dropdown';
+import getDate from '../helpers/getDate';
 
 const Menu = ({ updateQuery }) => {
   const [stateList, updateStates] = useState([])
@@ -13,7 +14,7 @@ const Menu = ({ updateQuery }) => {
   const [timeframe, updateTimeFrame] = useState('')
   const [popSelection, updatePopSelection] = useState('')
   const [startDate, updateStart] = useState('2020-01-22')
-  const [endDate, updateEnd] = useState('2020-11-04')
+  const [endDate, updateEnd] = useState(getDate())
   const [countiesLoading, updateCountiesLoading] = useState(false)
 
   useEffect(() => {
@@ -122,6 +123,7 @@ const Menu = ({ updateQuery }) => {
     }
   }
 
+
   return (
     <div className="Menu">
 
@@ -153,11 +155,11 @@ const Menu = ({ updateQuery }) => {
 
       <div>
         Starting Date:
-        <input value={startDate} onChange={(e) => {updateStart(e.target.value)}} type="date" className="dropdown date-input" min="2020-01-23" max="2020-11-03"></input>
+        <input value={startDate} onChange={(e) => {updateStart(e.target.value)}} type="date" className="dropdown date-input" min="2020-01-23" max={getDate()}></input>
       </div>
       <div>
         Ending Date:
-        <input value={endDate} onChange={(e) => {updateEnd(e.target.value)}} type="date" className="dropdown date-input" min="2020-01-24" max="2020-11-04"></input>
+        <input value={endDate} onChange={(e) => {updateEnd(e.target.value)}} type="date" className="dropdown date-input" min="2020-01-24" max={getDate()}></input>
       </div>
 
       {datasetSelection && popSelection ? <button onClick={submitQuery} className="submit-btn">Create Graph</button> : ''}
