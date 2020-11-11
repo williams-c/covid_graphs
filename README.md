@@ -14,29 +14,29 @@ The application interfaces with the server API which can also be queried directl
 
 Routes:
 
-**/list/states
+**/list/states**
 
   - returns a list of states that the API can generate data for
   
-**/list/:state/counties
+**/list/:state/counties**
 
   - returns a list of counties for a given state that the API can generate data for
   
   - required parameters:
     - state - the state to return data for
   
-**/total/state
+**/total/state**
 
  - returns the total number of confirmed cases for the given states
 
  - optional parameters:
-   - start - starting date for the time-series, must be of format 'YYYY-MM-DD' 
-    * data begins on 2020-01-22
-   - end - ending date for the time-series, must be of format 'YYYY-MM-DD' 
+   - start - starting date for the time-series, must be of format 'YYYY-MM-DD' If null, 2020-01-22 date will be selected
+     * data begins on 2020-01-22
+   - end - ending date for the time-series, must be of format 'YYYY-MM-DD' If null, current date will be selected
    - state - state to include in time-series, can request any number of states. If left blank, will return all states
   
   
-**/total/:state/county
+**/total/:state/county**
   
  - returns the total number of confirmed cases for the given counties
 
@@ -44,23 +44,23 @@ Routes:
    - state - the state for which you want county data to be returned
 
  - optional parameters:
-   - start - starting date for the time-series, must be of format 'YYYY-MM-DD' 
-    * data begins on 2020-01-22
-   - end - ending date for the time-series, must be of format 'YYYY-MM-DD' 
+   - start - starting date for the time-series, must be of format 'YYYY-MM-DD' If null, 2020-01-22 date will be selected
+     * data begins on 2020-01-22
+   - end - ending date for the time-series, must be of format 'YYYY-MM-DD' If null, current date will be selected
    - county - county to include in time-series, can request any number of counties. If left blank, will return all counties
   
-**/daily/state
+**/daily/state**
   
  - returns number of cases per given interval for the given states
 
  - optional parameters:
-   - start - starting date for the time-series, must be of format 'YYYY-MM-DD' 
-    * data begins on 2020-01-22
-   - end - ending date for the time-series, must be of format 'YYYY-MM-DD' 
+   - start - starting date for the time-series, must be of format 'YYYY-MM-DD' If null, 2020-01-22 date will be selected
+     * data begins on 2020-01-22
+   - end - ending date for the time-series, must be of format 'YYYY-MM-DD' If null, current date will be selected
    - state - state to include in time-series, can request any number of states. If left blank, will return all states
    - interval - defaults to per day, to access per week data pass in 'W' and for per month pass in 'Y'
   
-**/daily/:state/county
+**/daily/:state/county**
 
  - returns number of cases per given interval for the given counties
 
@@ -68,25 +68,25 @@ Routes:
    - state - the state for which you want county data to be returned
 
  - optional parameters:
-   - start - starting date for the time-series, must be of format 'YYYY-MM-DD' 
-    * data begins on 2020-01-22
-   - end - ending date for the time-series, must be of format 'YYYY-MM-DD' 
+   - start - starting date for the time-series, must be of format 'YYYY-MM-DD' If null, 2020-01-22 date will be selected
+     * data begins on 2020-01-22
+   - end - ending date for the time-series, must be of format 'YYYY-MM-DD' If null, current date will be selected
    - county - county to include in time-series, can request any number of counties. If left blank, will return all counties
    - interval - defaults to per day, to access per week data pass in 'W' and for per month pass in 'Y'
   
-**/change/state
+**/change/state**
   
  - returns daily percent change in cases for the given states
 
  - optional parameters:
-   - start - starting date for the time-series, must be of format 'YYYY-MM-DD' 
+   - start - starting date for the time-series, must be of format 'YYYY-MM-DD' If null, 2020-01-22 date will be selected
     * data begins on 2020-01-22
-   - end - ending date for the time-series, must be of format 'YYYY-MM-DD' 
+   - end - ending date for the time-series, must be of format 'YYYY-MM-DD' If null, current date will be selected
    - state - state to include in time-series, can request any number of states. If left blank, will return all states
    - interval - defaults to per day, to access per week data pass in 'W' and for per month pass in 'Y'
   
   
-**/change/:state/county
+**/change/:state/county**
 
  - returns daily percent change in cases for the given counties
 
@@ -94,9 +94,9 @@ Routes:
    - state - the state for which you want county data to be returned
 
  - optional parameters:
-   - start - starting date for the time-series, must be of format 'YYYY-MM-DD' 
+   - start - starting date for the time-series, must be of format 'YYYY-MM-DD' If null, 2020-01-22 date will be selected
     * data begins on 2020-01-22
-   - end - ending date for the time-series, must be of format 'YYYY-MM-DD' 
+   - end - ending date for the time-series, must be of format 'YYYY-MM-DD' If null, current date will be selected
    - county - county to include in time-series, can request any number of counties. If left blank, will return all counties
 
 
@@ -107,8 +107,7 @@ Routes:
  - npm
  - Python
  - Pandas(python library)
- 
- * For the geolocation features to work you will also need to add a Google Places API key to your .env file
+ * *For the geolocation features to work you will also need to add a Google Places API key to your .env file *
 
 # Development
 
