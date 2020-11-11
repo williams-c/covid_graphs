@@ -107,6 +107,7 @@ Routes:
  - npm
  - Python
  - Pandas(python library)
+ 
  *For the geolocation features to work you will also need to add a Google Places API key to your .env file *
 
 # Development
