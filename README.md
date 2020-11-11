@@ -30,7 +30,7 @@ Routes:
  - returns the total number of confirmed cases for the given states
 
  - optional parameters:
-   - start - starting date for the time-series, must be of format 'YYYY-MM-DD' If null, 2020-01-22 date will be selected
+   - start - starting date for the time-series, must be of format 'YYYY-MM-DD' If null, 2020-01-22  will be selected
      * data begins on 2020-01-22
    - end - ending date for the time-series, must be of format 'YYYY-MM-DD' If null, current date will be selected
    - state - state to include in time-series, can request any number of states. If left blank, will return all states
@@ -44,7 +44,7 @@ Routes:
    - state - the state for which you want county data to be returned
 
  - optional parameters:
-   - start - starting date for the time-series, must be of format 'YYYY-MM-DD' If null, 2020-01-22 date will be selected
+   - start - starting date for the time-series, must be of format 'YYYY-MM-DD' If null, 2020-01-22  will be selected
      * data begins on 2020-01-22
    - end - ending date for the time-series, must be of format 'YYYY-MM-DD' If null, current date will be selected
    - county - county to include in time-series, can request any number of counties. If left blank, will return all counties
@@ -54,7 +54,7 @@ Routes:
  - returns number of cases per given interval for the given states
 
  - optional parameters:
-   - start - starting date for the time-series, must be of format 'YYYY-MM-DD' If null, 2020-01-22 date will be selected
+   - start - starting date for the time-series, must be of format 'YYYY-MM-DD' If null, 2020-01-22  will be selected
      * data begins on 2020-01-22
    - end - ending date for the time-series, must be of format 'YYYY-MM-DD' If null, current date will be selected
    - state - state to include in time-series, can request any number of states. If left blank, will return all states
@@ -68,7 +68,7 @@ Routes:
    - state - the state for which you want county data to be returned
 
  - optional parameters:
-   - start - starting date for the time-series, must be of format 'YYYY-MM-DD' If null, 2020-01-22 date will be selected
+   - start - starting date for the time-series, must be of format 'YYYY-MM-DD' If null, 2020-01-22  will be selected
      * data begins on 2020-01-22
    - end - ending date for the time-series, must be of format 'YYYY-MM-DD' If null, current date will be selected
    - county - county to include in time-series, can request any number of counties. If left blank, will return all counties
@@ -79,7 +79,7 @@ Routes:
  - returns daily percent change in cases for the given states
 
  - optional parameters:
-   - start - starting date for the time-series, must be of format 'YYYY-MM-DD' If null, 2020-01-22 date will be selected
+   - start - starting date for the time-series, must be of format 'YYYY-MM-DD' If null, 2020-01-22  will be selected
     * data begins on 2020-01-22
    - end - ending date for the time-series, must be of format 'YYYY-MM-DD' If null, current date will be selected
    - state - state to include in time-series, can request any number of states. If left blank, will return all states
