@@ -113,10 +113,15 @@ Routes:
 # Development
 
 To start developing you'll need python/pandas installed on your computer first, then
+
+Terminal 1:
 ```bash
 cd client && npm install
-cd ..
-cd server && npm install
-cd ..
 npm start
+
+```
+Terminal 2:
+```bash
+cd server && npm install
+nodemeon index.js
 ```
