@@ -33,7 +33,7 @@ const App = () => {
 
       <div className="container">
 
-        <Testing_Locations userLocation={userLocation} />
+        <Testing_Locations id="test-location" userLocation={userLocation} />
 
         <div className="App">
           <h1>COVID-19 Data Visualizer</h1>
@@ -52,7 +52,7 @@ const App = () => {
           }
           <Menu updateQuery={updateQueryString}/>
         </div>
-          <Graph_History plotHistory={plotHistory} selectedGraph={selectedGraph} changeSelected={changeSelectedHandler} />
+          <Graph_History id='graph-history' plotHistory={plotHistory} selectedGraph={selectedGraph} changeSelected={changeSelectedHandler} />
       </div>
 
   );

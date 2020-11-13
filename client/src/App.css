@@ -12,6 +12,18 @@ body{
   grid-column-end: 3;
   background-color: #f1f6f9;
 }
+@media screen and (max-width: 480px){
+  .continer{
+    grid-template-columns: 0% 100% 0%;
+  }
+  .App{
+    grid-column-start: 1;
+    grid-column-end: 4;
+  }
+  .sidebar{
+    display: none;
+  }
+}
 .dropdown{
   margin-left: 20px;
   margin-bottom: 10px;
