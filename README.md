@@ -4,6 +4,8 @@ An interactive graphing tool and csv generator for Covid-19 data.
 Master dataset is sourced from the COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University
 https://github.com/CSSEGISandData/COVID-19
 
+![](App-Demo.gif)
+
 # Features
 
 Users can interact with the application to find nearest Covid-19 testing locations, generate customizable graphs for specific states/counties and specific date ranges. Graphs can also be downloaded as image files or in time-series csv format. Graph history is also stored and users can click on images on the right to revisit previous graphs.
