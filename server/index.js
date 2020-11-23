@@ -23,6 +23,15 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
 })
 
+app.post('/login', (req, res) => {
+  const bcrypt = require('bcrypt');
+  const saltRounds = 10;
+  console.log(req.body.password)
+  bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
+    console.log(hash)
+  });
+})
+
 // test = /total/states?start=2020-04-01&end=2020-06-30&state=Colorado&state=Utah&state=Montana
 app.get('/total/state', (req, res) => {
   const start = req.query.start ? req.query.start : '2020-01-23'
