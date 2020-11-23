@@ -4,6 +4,8 @@ import Graph from './components/Graph';
 import Menu from './components/Menu';
 import Graph_History from './components/Graph_History';
 import Testing_Locations from './components/Testing_Locations';
+import Login from './components/Login';
+
 
 const App = () => {
   const [queryString, updateQueryString] = useState('')
@@ -12,6 +14,7 @@ const App = () => {
   const [plotHistory, updatePlotHistory] = useState([])
   const [selectedGraph, updateSelectedGraph] = useState(-1)
   const [userLocation, updateUserLocation] = useState([])
+  const [loginStatus, updateLoginStatus] = useState('logged-out')
 
   const changeSelectedHandler = (index) => {
     updateSelectedGraph(index)
@@ -29,30 +32,43 @@ const App = () => {
     });
   },[])
 
+  const guestLogin = () => {
+    updateLoginStatus('guest')
+  }
+
   return (
 
       <div className="container">
 
-        <Testing_Locations id="test-location" userLocation={userLocation} />
+        {loginStatus === 'logged-in' ?
+        <Testing_Locations id="test-location" userLocation={userLocation} /> : ''}
 
         <div className="App">
           <h1>COVID-19 Data Visualizer</h1>
-          {
-            queryString ?
-            <Graph
-              query={queryString}
-              plotData={plotData}
-              plotLayout={plotLayout}
-              updateData={updateData}
-              updateLayout={updateLayout}
-              updatePlotHistory={updatePlotHistory}
-              updateSelectedGraph={updateSelectedGraph}
-            /> :
-            <h3 className="default-text">What Would You Like To See?</h3>
+          {/* conditionally render login page, sign-up page or graphing UI  */}
+          {loginStatus === 'logged-out' ?
+            <Login /> :
+            <div>
+              {
+                queryString ?
+                <Graph
+                  query={queryString}
+                  plotData={plotData}
+                  plotLayout={plotLayout}
+                  updateData={updateData}
+                  updateLayout={updateLayout}
+                  updatePlotHistory={updatePlotHistory}
+                  updateSelectedGraph={updateSelectedGraph}
+                /> :
+                <h3 className="default-text">What Would You Like To See?</h3>
+              }
+              <Menu updateQuery={updateQueryString}/>
+            </div>
           }
-          <Menu updateQuery={updateQueryString}/>
+
         </div>
-          <Graph_History id='graph-history' plotHistory={plotHistory} selectedGraph={selectedGraph} changeSelected={changeSelectedHandler} />
+        {loginStatus === 'logged-in' ? <Graph_History id='graph-history' plotHistory={plotHistory} selectedGraph={selectedGraph} changeSelected={changeSelectedHandler} /> : ''}
+
       </div>
 
   );

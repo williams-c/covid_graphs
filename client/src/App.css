@@ -120,3 +120,24 @@ button{
 .test-location-address{
   font-size: small;
 }
+.login-form{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  border: 1px solid black;
+  margin-top: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #9ba4b4;
+}
+.login-form-element{
+  width: 75%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  /* border-radius: 5px; */
+}
+a{
+  color: blue
+}
