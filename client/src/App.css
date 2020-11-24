@@ -141,3 +141,18 @@ button{
 a{
   color: blue
 }
+.pwd-txt{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: smaller;
+  width: 75%;
+}
+.invalid-username{
+  color: red;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: smaller;
+  width: 75%;
+}

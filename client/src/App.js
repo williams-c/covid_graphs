@@ -36,6 +36,10 @@ const App = () => {
     updateLoginStatus('guest')
   }
 
+  const userLogin = () => {
+    updateLoginStatus('logged-in')
+  }
+
   return (
 
       <div className="container">
@@ -47,7 +51,7 @@ const App = () => {
           <h1>COVID-19 Data Visualizer</h1>
           {/* conditionally render login page, sign-up page or graphing UI  */}
           {loginStatus === 'logged-out' ?
-            <Login /> :
+            <Login userLogin={userLogin} /> :
             <div>
               {
                 queryString ?

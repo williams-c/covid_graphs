@@ -7,6 +7,7 @@ const { PythonShell } = require('python-shell')
 const { getDate } = require('./server_helpers/getDate')
 const stringify = require('csv-stringify');
 require('dotenv').config()
+const queries = require('./database/queries')
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -24,12 +25,11 @@ app.get('/', (req, res) => {
 })
 
 app.post('/login', (req, res) => {
-  const bcrypt = require('bcrypt');
-  const saltRounds = 10;
-  console.log(req.body.password)
-  bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
-    console.log(hash)
-  });
+  queries.loginUser(req.body);
+})
+
+app.post('/sign-up', (req, res) => {
+  queries.signUpUser(req.body);
 })
 
 // test = /total/states?start=2020-04-01&end=2020-06-30&state=Colorado&state=Utah&state=Montana
