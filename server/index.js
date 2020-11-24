@@ -41,6 +41,7 @@ app.post('/login', async (req, res) => {
 app.post('/sign-up', async (req, res) => {
   try{
     let data = await queries.signUpUser(req.body)
+    console.log(data)
     res.status(200).send(data)
   } catch (err) {
     console.log(err)
