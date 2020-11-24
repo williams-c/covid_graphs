@@ -24,12 +24,28 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
 })
 
-app.post('/login', (req, res) => {
-  queries.loginUser(req.body);
+app.post('/login', async (req, res) => {
+  try{
+    let data = await queries.loginUser(req.body)
+    if (data) {
+      res.sendStatus(200)
+    } else {
+      throw 'Invalid Password'
+    }
+  } catch (err) {
+    console.log(err)
+    res.sendStatus(500)
+  }
 })
 
-app.post('/sign-up', (req, res) => {
-  queries.signUpUser(req.body);
+app.post('/sign-up', async (req, res) => {
+  try{
+    let data = await queries.signUpUser(req.body)
+    res.status(200).send(data)
+  } catch (err) {
+    console.log(err)
+    res.sendStatus(500)
+  }
 })
 
 // test = /total/states?start=2020-04-01&end=2020-06-30&state=Colorado&state=Utah&state=Montana
