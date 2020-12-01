@@ -56,8 +56,8 @@ const App = () => {
           <h1>COVID-19 Data Visualizer</h1>
           {/* conditionally render login page, sign-up page or graphing UI  */}
           {loginStatus === 'logged-out' ?
-            <Login userLogin={userLogin} signUp={userSignUp} /> :
-            loginStatus === 'sign-up' ? <SignUp userLogin={userLogin} /> :
+            <Login userLogin={userLogin} signUp={userSignUp} guest={guestLogin}/> :
+            loginStatus === 'sign-up' ? <SignUp userLogin={userLogin} guest={guestLogin}/> :
             <div>
               {
                 queryString ?

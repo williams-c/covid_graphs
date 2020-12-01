@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Login = ({ userLogin, signUp }) => {
+const Login = ({ userLogin, signUp , guest}) => {
     const [username, updateUsername] = useState('');
     const [password, updatePassword] = useState('');
     const [status, updateStatus] = useState('incomplete')
@@ -38,7 +38,7 @@ const Login = ({ userLogin, signUp }) => {
             <input onChange={(e) => {updateUsername(e.target.value)}} className='login-form-element' type="text" placeholder="Username" value={username}></input><br/>
             <input onChange={(e) => {updatePassword(e.target.value)}} className='login-form-element' type="password" placeholder="Password" value={password}></input><br/>
             <input onClick={(e) => {handleSubmit(e)}} className='login-form-element' type="submit"></input>
-            <p>Click <a>here </a>to continue as guest</p>
+            <p>Click <a onClick={guest}>here </a>to continue as guest</p>
             <p>New User? Click <a onClick={signUp}>here</a> to sign up</p>
           </form>
 

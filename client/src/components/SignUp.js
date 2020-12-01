@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const SignUp = ({ userLogin }) => {
+const SignUp = ({ userLogin, guest }) => {
     const [username, updateUsername] = useState('');
     const [password, updatePassword] = useState('');
 
@@ -49,7 +49,7 @@ const SignUp = ({ userLogin }) => {
             {password === undefined ? <div className='invalid-username'>* Invalid Password</div> : ''}
             <div className="pwd-txt">Passwords must be at least eight characters and contain one uppercase letter, one lowercase letter and one number</div>
             <input onClick={(e) => {handleSubmit(e)}} className='login-form-element' type="submit"></input>
-            <p>Click <a>here </a>to continue as guest</p>
+            <p>Click <a onClick={guest}>here </a>to continue as guest</p>
             <p>Already Registered? Click <a>here</a> to login</p>
           </form>
 
