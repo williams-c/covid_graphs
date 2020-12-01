@@ -5,6 +5,7 @@ import Menu from './components/Menu';
 import Graph_History from './components/Graph_History';
 import Testing_Locations from './components/Testing_Locations';
 import Login from './components/Login';
+import SignUp from './components/SignUp';
 
 
 const App = () => {
@@ -40,6 +41,10 @@ const App = () => {
     updateLoginStatus('logged-in')
   }
 
+  const userSignUp = () => {
+    updateLoginStatus('sign-up')
+  }
+
   return (
 
       <div className="container">
@@ -51,7 +56,8 @@ const App = () => {
           <h1>COVID-19 Data Visualizer</h1>
           {/* conditionally render login page, sign-up page or graphing UI  */}
           {loginStatus === 'logged-out' ?
-            <Login userLogin={userLogin} /> :
+            <Login userLogin={userLogin} signUp={userSignUp} /> :
+            loginStatus === 'sign-up' ? <SignUp userLogin={userLogin} /> :
             <div>
               {
                 queryString ?
