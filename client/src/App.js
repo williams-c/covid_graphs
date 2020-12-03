@@ -56,6 +56,13 @@ const App = () => {
     updateLoginStatus('sign-up')
   }
 
+  const userLogout = () => {
+    //clear tokens
+    localStorage.removeItem('tokens');
+    setAuthTokens('');
+    updateLoginStatus('logged-out');
+  }
+
   return (
 
       <div className="container">
@@ -65,6 +72,7 @@ const App = () => {
 
         <div className="App">
           <h1>COVID-19 Data Visualizer</h1>
+          {loginStatus === 'logged-in' ?  <button onClick={userLogout}>Log Out</button> : ''}
           {/* conditionally render login page, sign-up page or graphing UI  */}
           {loginStatus === 'logged-out' ?
             <Login userLogin={userLogin} signUp={userSignUp} guest={guestLogin} setTokens={setTokens}/> :
