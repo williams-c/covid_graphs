@@ -9,6 +9,8 @@ import SignUp from './components/SignUp';
 
 
 const App = () => {
+  const tokens = JSON.parse(localStorage.getItem('tokens'));
+  const [authTokens, setAuthTokens] = useState(tokens);
   const [queryString, updateQueryString] = useState('')
   const [plotData, updateData] = useState('')
   const [plotLayout, updateLayout] = useState('')
@@ -16,6 +18,11 @@ const App = () => {
   const [selectedGraph, updateSelectedGraph] = useState(-1)
   const [userLocation, updateUserLocation] = useState([])
   const [loginStatus, updateLoginStatus] = useState('logged-out')
+
+  const setTokens = (data) => {
+    localStorage.setItem('tokens', JSON.stringify(data));
+    setAuthTokens(data);
+  }
 
   const changeSelectedHandler = (index) => {
     updateSelectedGraph(index)
@@ -31,6 +38,10 @@ const App = () => {
       const location = [position.coords.latitude, position.coords.longitude]
       updateUserLocation(location)
     });
+    // if token exists user is logged in and redirect to main page
+    if (authTokens) {
+      userLogin();
+    }
   },[])
 
   const guestLogin = () => {
@@ -56,7 +67,7 @@ const App = () => {
           <h1>COVID-19 Data Visualizer</h1>
           {/* conditionally render login page, sign-up page or graphing UI  */}
           {loginStatus === 'logged-out' ?
-            <Login userLogin={userLogin} signUp={userSignUp} guest={guestLogin}/> :
+            <Login userLogin={userLogin} signUp={userSignUp} guest={guestLogin} setTokens={setTokens}/> :
             loginStatus === 'sign-up' ? <SignUp userLogin={userLogin} guest={guestLogin}/> :
             <div>
               {

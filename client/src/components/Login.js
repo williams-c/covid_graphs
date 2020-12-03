@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Login = ({ userLogin, signUp , guest}) => {
+const Login = ({ userLogin, signUp , guest, setTokens }) => {
     const [username, updateUsername] = useState('');
     const [password, updatePassword] = useState('');
     const [status, updateStatus] = useState('incomplete')
@@ -19,6 +19,7 @@ const Login = ({ userLogin, signUp , guest}) => {
       })
       .then((data) => {
         userLogin()
+        setTokens(data);
       })
       .catch((err) => {
         console.log(err)
