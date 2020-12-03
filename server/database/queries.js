@@ -56,6 +56,7 @@ const signUpUser = (info) => {
 
 }
 
+
 module.exports = {
   loginUser,
   signUpUser,
