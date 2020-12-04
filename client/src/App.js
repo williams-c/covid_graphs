@@ -86,7 +86,7 @@ const App = () => {
           {/* conditionally render login page, sign-up page or graphing UI  */}
           {loginStatus === 'logged-out' ?
             <Login userLogin={userLogin} signUp={userSignUp} guest={guestLogin} setTokens={setTokens}/> :
-            loginStatus === 'sign-up' ? <SignUp userLogin={userLogin} guest={guestLogin}/> :
+            loginStatus === 'sign-up' ? <SignUp userLogin={userLogin} guest={guestLogin} goToLogin={updateLoginStatus} /> :
             <div>
               {
                 queryString ?
