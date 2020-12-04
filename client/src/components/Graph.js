@@ -85,7 +85,7 @@ const Graph = ({ query, plotData, plotLayout, updateData, updateLayout, updatePl
                .then(
                    function(url)
                {
-                   updatePlotHistory(history => [...history, [url, graphElements, plotLabel]])
+                   updatePlotHistory(history => [[url, graphElements, plotLabel], ...history])
                }
                )
           });

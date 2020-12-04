@@ -6,7 +6,7 @@ const img_jpg= d3.select('#jpg-export');
 
 
 
-const Graph_History = ({ plotHistory, selectedGraph, changeSelected }) => {
+const Graph_History = ({ plotHistory, selectedGraph, changeSelected, queryString }) => {
 
 
   return (
@@ -15,7 +15,7 @@ const Graph_History = ({ plotHistory, selectedGraph, changeSelected }) => {
         {plotHistory.length > 1 ? <p className="title-text test-location-text">Your Previous Graphs</p>: ''}
 
       {plotHistory.map((image, index) => {
-        if (selectedGraph === -1 && index === plotHistory.length - 1) {
+        if (selectedGraph === -1 && index === 0 && queryString) {
           return
         } else if (selectedGraph === index) {
           return
