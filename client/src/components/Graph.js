@@ -4,7 +4,7 @@ import Plotly from 'plotly.js';
 import axios from 'axios';
 import fileDownload from 'js-file-download';
 
-const Graph = ({ query, plotData, plotLayout, updateData, updateLayout, updatePlotHistory, updateSelectedGraph }) => {
+const Graph = ({ loginStatus, query, plotData, plotLayout, updateData, updateLayout, updatePlotHistory, updateSelectedGraph }) => {
   // const [plotData, updateData] = useState('')
   // const [plotLayout, updateLayout] = useState('')
   const [loading, updateLoading] = useState(false)
@@ -85,7 +85,9 @@ const Graph = ({ query, plotData, plotLayout, updateData, updateLayout, updatePl
                .then(
                    function(url)
                {
-                   updatePlotHistory(history => [[url, graphElements, plotLabel], ...history])
+                   if (loginStatus === 'logged-in') {
+                     updatePlotHistory(history => [[url, graphElements, plotLabel], ...history])
+                   }
                }
                )
           });

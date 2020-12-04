@@ -91,6 +91,7 @@ const App = () => {
               {
                 queryString ?
                 <Graph
+                  loginStatus={loginStatus}
                   query={queryString}
                   plotData={plotData}
                   plotLayout={plotLayout}
