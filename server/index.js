@@ -9,7 +9,6 @@ const stringify = require('csv-stringify');
 require('dotenv').config()
 const queries = require('./database/queries')
 
-const total = require('./routes/total')
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -22,7 +21,10 @@ app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
 // routes
 app.use('/data', express.static(path.join(__dirname, 'static_csv')));
+const total = require('./routes/total')
 app.use('/total', total);
+const daily = require('./routes/daily')
+app.use('/daily', daily);
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
@@ -121,77 +123,77 @@ app.post('/sign-up', async (req, res) => {
 //   })
 // })
 
-app.get('/daily/state', (req, res) => {
-  const start = req.query.start ? req.query.start : '2020-01-23'
-  const end = req.query.end ? req.query.end : getDate()
-  const states = req.query.state ? req.query.state : 'all'
-  // interval can be day(D), week(W), month(M) or year(Y)
-  const interval = req.query.interval ? req.query.interval : 'D'
-  let argsList = []
-  if (typeof states === 'string') {
-    argsList = [start, end, interval, states]
-  } else {
-    argsList = [start, end, interval, ...states]
-  }
-  const options = {
-    mode: 'text',
-    pythonOptions: ['-u'],
-    scriptPath: 'data_scripts',
-    args: argsList
-  }
+// app.get('/daily/state', (req, res) => {
+//   const start = req.query.start ? req.query.start : '2020-01-23'
+//   const end = req.query.end ? req.query.end : getDate()
+//   const states = req.query.state ? req.query.state : 'all'
+//   // interval can be day(D), week(W), month(M) or year(Y)
+//   const interval = req.query.interval ? req.query.interval : 'D'
+//   let argsList = []
+//   if (typeof states === 'string') {
+//     argsList = [start, end, interval, states]
+//   } else {
+//     argsList = [start, end, interval, ...states]
+//   }
+//   const options = {
+//     mode: 'text',
+//     pythonOptions: ['-u'],
+//     scriptPath: 'data_scripts',
+//     args: argsList
+//   }
 
-  PythonShell.run('state_daily.py', options, (err, data) => {
-    if (err) {
-      res.sendStatus(500)
-      throw err
-    }
-    let response = []
-    data.forEach((row) => {
-      row = row.split(',')
-      response.push(row)
-    })
-    stringify(response, function(err, output){
-      res.status(200).send(output)
-    })
-  })
-})
+//   PythonShell.run('state_daily.py', options, (err, data) => {
+//     if (err) {
+//       res.sendStatus(500)
+//       throw err
+//     }
+//     let response = []
+//     data.forEach((row) => {
+//       row = row.split(',')
+//       response.push(row)
+//     })
+//     stringify(response, function(err, output){
+//       res.status(200).send(output)
+//     })
+//   })
+// })
 
-app.get('/daily/:state/county', (req, res) => {
-  const state = req.params.state
-  const start = req.query.start ? req.query.start : '2020-01-23'
-  const end = req.query.end ? req.query.end : getDate()
-  const counties = req.query.county ? req.query.county : 'all'
-  // interval can be day(D), week(W), month(M) or year(Y)
-  const interval = req.query.interval ? req.query.interval : 'D'
-  let argsList = []
-  // county can be multi item array, or a string
-  if (typeof counties === 'string') {
-    argsList = [start, end, state, interval, counties]
-  } else {
-    argsList = [start, end, state, interval, ...counties]
-  }
-  const options = {
-    mode: 'text',
-    pythonOptions: ['-u'],
-    scriptPath: 'data_scripts',
-    args: argsList
-  }
+// app.get('/daily/:state/county', (req, res) => {
+//   const state = req.params.state
+//   const start = req.query.start ? req.query.start : '2020-01-23'
+//   const end = req.query.end ? req.query.end : getDate()
+//   const counties = req.query.county ? req.query.county : 'all'
+//   // interval can be day(D), week(W), month(M) or year(Y)
+//   const interval = req.query.interval ? req.query.interval : 'D'
+//   let argsList = []
+//   // county can be multi item array, or a string
+//   if (typeof counties === 'string') {
+//     argsList = [start, end, state, interval, counties]
+//   } else {
+//     argsList = [start, end, state, interval, ...counties]
+//   }
+//   const options = {
+//     mode: 'text',
+//     pythonOptions: ['-u'],
+//     scriptPath: 'data_scripts',
+//     args: argsList
+//   }
 
-  PythonShell.run('county_daily.py', options, (err, data) => {
-    if (err) {
-      res.sendStatus(500)
-      throw err
-    }
-    let response = []
-    data.forEach((row) => {
-      row = row.split(',')
-      response.push(row)
-    })
-    stringify(response, function(err, output){
-      res.status(200).send(output)
-    })
-  })
-})
+//   PythonShell.run('county_daily.py', options, (err, data) => {
+//     if (err) {
+//       res.sendStatus(500)
+//       throw err
+//     }
+//     let response = []
+//     data.forEach((row) => {
+//       row = row.split(',')
+//       response.push(row)
+//     })
+//     stringify(response, function(err, output){
+//       res.status(200).send(output)
+//     })
+//   })
+// })
 
 app.get('/change/state', (req, res) => {
   const start = req.query.start ? req.query.start : '2020-01-23'
