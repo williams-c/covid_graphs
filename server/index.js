@@ -9,6 +9,8 @@ const stringify = require('csv-stringify');
 require('dotenv').config()
 const queries = require('./database/queries')
 
+const total = require('./routes/total')
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -18,7 +20,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
+// routes
 app.use('/data', express.static(path.join(__dirname, 'static_csv')));
+app.use('/total', total);
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
@@ -49,73 +53,73 @@ app.post('/sign-up', async (req, res) => {
   }
 })
 
-// test = /total/states?start=2020-04-01&end=2020-06-30&state=Colorado&state=Utah&state=Montana
-app.get('/total/state', (req, res) => {
-  const start = req.query.start ? req.query.start : '2020-01-23'
-  const end = req.query.end ? req.query.end : getDate()
-  const states = req.query.state ? req.query.state : 'all'
-  let argsList = []
-  if (typeof states === 'string') {
-    argsList = [start, end, states]
-  } else {
-    argsList = [start, end, ...states]
-  }
-  const options = {
-    mode: 'text',
-    pythonOptions: ['-u'],
-    scriptPath: 'data_scripts',
-    args: argsList
-  }
+// // test = /total/states?start=2020-04-01&end=2020-06-30&state=Colorado&state=Utah&state=Montana
+// app.get('/total/state', (req, res) => {
+//   const start = req.query.start ? req.query.start : '2020-01-23'
+//   const end = req.query.end ? req.query.end : getDate()
+//   const states = req.query.state ? req.query.state : 'all'
+//   let argsList = []
+//   if (typeof states === 'string') {
+//     argsList = [start, end, states]
+//   } else {
+//     argsList = [start, end, ...states]
+//   }
+//   const options = {
+//     mode: 'text',
+//     pythonOptions: ['-u'],
+//     scriptPath: 'data_scripts',
+//     args: argsList
+//   }
 
-  PythonShell.run('state_total.py', options, (err, data) => {
-    if (err) {
-      res.sendStatus(500)
-      throw err
-    }
-    let response = []
-    data.forEach((row) => {
-      row = row.split(',')
-      response.push(row)
-    })
-    stringify(response, function(err, output){
-      res.status(200).send(output)
-    })
-  })
-})
+//   PythonShell.run('state_total.py', options, (err, data) => {
+//     if (err) {
+//       res.sendStatus(500)
+//       throw err
+//     }
+//     let response = []
+//     data.forEach((row) => {
+//       row = row.split(',')
+//       response.push(row)
+//     })
+//     stringify(response, function(err, output){
+//       res.status(200).send(output)
+//     })
+//   })
+// })
 
-app.get('/total/:state/county', (req, res) => {
-  const state = req.params.state
-  const start = req.query.start ? req.query.start : '2020-01-23'
-  const end = req.query.end ? req.query.end : getDate()
-  const counties = req.query.county ? req.query.county : 'all'
-  let argsList = []
-  if (typeof counties === 'string') {
-    argsList = [start, end, state, counties]
-  } else {
-    argsList = [start, end, state, ...counties]
-  }
-  const options = {
-    mode: 'text',
-    pythonOptions: ['-u'],
-    scriptPath: 'data_scripts',
-    args: argsList
-  }
+// app.get('/total/:state/county', (req, res) => {
+//   const state = req.params.state
+//   const start = req.query.start ? req.query.start : '2020-01-23'
+//   const end = req.query.end ? req.query.end : getDate()
+//   const counties = req.query.county ? req.query.county : 'all'
+//   let argsList = []
+//   if (typeof counties === 'string') {
+//     argsList = [start, end, state, counties]
+//   } else {
+//     argsList = [start, end, state, ...counties]
+//   }
+//   const options = {
+//     mode: 'text',
+//     pythonOptions: ['-u'],
+//     scriptPath: 'data_scripts',
+//     args: argsList
+//   }
 
-  PythonShell.run('county_total.py', options, (err, data) => {
-    if (err) {
-      res.sendStatus(500)
-      throw err
-    }
-    let response = []
-    data.forEach((row) => {
-      row = row.split(',')
-      response.push(row)
-    })
-    stringify(response, function(err, output){
-      res.status(200).send(output)
-    })
-  })
-})
+//   PythonShell.run('county_total.py', options, (err, data) => {
+//     if (err) {
+//       res.sendStatus(500)
+//       throw err
+//     }
+//     let response = []
+//     data.forEach((row) => {
+//       row = row.split(',')
+//       response.push(row)
+//     })
+//     stringify(response, function(err, output){
+//       res.status(200).send(output)
+//     })
+//   })
+// })
 
 app.get('/daily/state', (req, res) => {
   const start = req.query.start ? req.query.start : '2020-01-23'
